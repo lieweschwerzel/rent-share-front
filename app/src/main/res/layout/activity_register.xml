@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/createAccountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Account aanmaken"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/firstPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/firstPasswordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/firstPasswordLabel"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/secondPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/secondPasswordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/secondPasswordLabel"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/firstPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/firstPasswordText"
+        android:text="Wachtwoord"
+        app:layout_constraintStart_toStartOf="@+id/addressLabel"
+        app:layout_constraintTop_toBottomOf="@+id/addressStreetText" />
+
+    <TextView
+        android:id="@+id/secondPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/secondPasswordText"
+        android:text="Herhaal wachtwoord"
+        app:layout_constraintStart_toStartOf="@+id/firstPasswordText"
+        app:layout_constraintTop_toBottomOf="@+id/firstPasswordText" />
+
+    <TextView
+        android:id="@+id/userNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:labelFor="@id/UserNameText"
+        android:text="Gebruikersnaam"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountText" />
+
+    <TextView
+        android:id="@+id/zipCodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/zipCodeText"
+        android:text="Postcode"
+        app:layout_constraintStart_toStartOf="@+id/UserNameText"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameText" />
+
+    <TextView
+        android:id="@+id/addressLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/addressStreetText"
+        android:text="Straatnaam en huisnummer"
+        app:layout_constraintStart_toStartOf="@+id/zipCodeText"
+        app:layout_constraintTop_toBottomOf="@+id/zipCodeText" />
+
+    <EditText
+        android:id="@+id/UserNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/userNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLabel"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/addressStreetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        app:layout_constraintStart_toStartOf="@+id/addressLabel"
+        app:layout_constraintTop_toBottomOf="@+id/addressLabel"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/AddressNumberText"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/addressStreetText"
+        app:layout_constraintStart_toEndOf="@+id/addressStreetText"
+        app:layout_constraintTop_toTopOf="@+id/addressStreetText" />
+
+    <EditText
+        android:id="@+id/zipCodeText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/zipCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/zipCodeLabel"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="tryRegister"
+        android:text="Registreren"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondPasswordText" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdvancedSearchActivity">
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:text="Prijs"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/categoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Categorie"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/priceLabel"
+        app:layout_constraintTop_toBottomOf="@+id/priceLabel" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/priceLabel"
+        app:layout_constraintStart_toEndOf="@+id/priceLabel"
+        app:layout_constraintTop_toTopOf="@+id/priceLabel" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/toText"
+        app:layout_constraintTop_toTopOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/toText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="t/m"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText" />
+
+    <RadioButton
+        android:id="@+id/firstCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Kleding"
+        app:layout_constraintStart_toStartOf="@+id/categoryLabel"
+        app:layout_constraintTop_toBottomOf="@+id/categoryLabel" />
+
+    <RadioButton
+        android:id="@+id/secondCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Sport"
+        app:layout_constraintBottom_toBottomOf="@+id/firstCategoryRadioBtn"
+        app:layout_constraintStart_toEndOf="@+id/firstCategoryRadioBtn"
+        app:layout_constraintTop_toTopOf="@+id/firstCategoryRadioBtn" />
+
+    <RadioButton
+        android:id="@+id/thirdCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:text="Apparatuur"
+        app:layout_constraintBottom_toBottomOf="@+id/secondCategoryRadioBtn"
+        app:layout_constraintStart_toEndOf="@+id/secondCategoryRadioBtn"
+        app:layout_constraintTop_toTopOf="@+id/secondCategoryRadioBtn" />
+
+    <RadioButton
+        android:id="@+id/fourthCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Boeken"
+        app:layout_constraintStart_toStartOf="@+id/firstCategoryRadioBtn"
+        app:layout_constraintTop_toBottomOf="@+id/firstCategoryRadioBtn" />
+
+    <RadioButton
+        android:id="@+id/fifthCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Kunst"
+        app:layout_constraintBottom_toBottomOf="@+id/fourthCategoryRadioBtn"
+        app:layout_constraintStart_toEndOf="@+id/fourthCategoryRadioBtn"
+        app:layout_constraintTop_toTopOf="@+id/fourthCategoryRadioBtn" />
+
+    <RadioButton
+        android:id="@+id/sixthCategoryRadioBtn"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Voertuigen"
+        app:layout_constraintBottom_toBottomOf="@+id/fifthCategoryRadioBtn"
+        app:layout_constraintStart_toEndOf="@+id/fifthCategoryRadioBtn"
+        app:layout_constraintTop_toTopOf="@+id/fifthCategoryRadioBtn" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="advancedSearch"
+        android:text="Zoeken"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
