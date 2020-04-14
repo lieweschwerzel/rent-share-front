@@ -1,5 +1,6 @@
 package com.example.rentshare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private EditText searchText;
-    private Button searchButton;
+    private Button searchButton, addButton;
     private String URL = "http://192.168.1.105:8080/rest/users/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         textViewResult = findViewById(R.id.text_view_result);
         searchButton = findViewById(R.id.searchButton);
+        addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -40,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 //        getUsers();
+        addButton.setOnClickListener((view -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+
+        }));
+
         searchButton.setOnClickListener((view -> {
             String searchTitle = searchText.getText().toString();
             Call<List<User>> call = jsonPlaceHolderApi.search(searchTitle);
@@ -48,20 +56,18 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
                     if (!response.isSuccessful()) {
-                        if (response.code()==404){
+                        if (response.code() == 404) {
                             textViewResult.setText("wel iets invoeren");
-                        }
-
-                        else{
-                            textViewResult.setText("" + response.code()+response.body());
+                        } else {
+                            textViewResult.setText("" + response.code());
                         }
                         return;
                     }
 
                     textViewResult.setText("");
                     List<User> users = response.body();
-                    if (users.isEmpty()){
-                        textViewResult.setText("Niets gevonden op "+searchTitle);
+                    if (users.isEmpty()) {
+                        textViewResult.setText("Niets gevonden op " + searchTitle);
                     }
 
                     for (User user : users) {
