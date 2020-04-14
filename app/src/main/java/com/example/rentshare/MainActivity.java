@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 //        getUsers();
         addButton.setOnClickListener((view -> {
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
             startActivity(intent);
 
         }));
+
+        createPost();
 
         searchButton.setOnClickListener((view -> {
             String searchTitle = searchText.getText().toString();
@@ -113,39 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 textViewResult.setText(t.getMessage());
             }
         });
-    }
-
-    private void search() {
-//        EditText editText = findViewById()
-        String searchTitle = searchText.getText().toString();
-
-        Call<List<User>> call = jsonPlaceHolderApi.search(searchTitle);
-
-        call.enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("code: " + response.code());
-                    return;
-                }
-                List<User> users = response.body();
-
-                for (User user : users) {
-                    String content = "";
-                    content += "ID: " + user.getId() + "\n";
-                    content += "Name: " + user.getName() + "\n";
-                    content += "Email: " + user.getEmail() + "\n\n";
-                    textViewResult.append(content);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
-            }
-        });
-
-
     }
 
     private void createPost() {
