@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface JsonPlaceHolderApi {
 
@@ -16,6 +17,9 @@ public interface JsonPlaceHolderApi {
 //
     @POST("load")
     Call<Void> createUser(@Body User user);
+
+    @GET("search/{name}")
+    Call<List<User>> search(@Path("name") String search);
 
 //    @FormUrlEncoded
 //    @POST("/load")
