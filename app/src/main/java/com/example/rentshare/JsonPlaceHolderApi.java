@@ -21,6 +21,8 @@ public interface JsonPlaceHolderApi {
     @GET("search/{name}")
     Call<List<User>> search(@Path("name") String search);
 
+    @GET("delete")
+    Call<Void> deleteAll();
 
 
 //    @FormUrlEncoded

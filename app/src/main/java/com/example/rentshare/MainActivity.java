@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private EditText searchText;
-    private Button searchButton, addButton;
+    private Button searchButton, addButton, deleteButton;
     private String URL = "http://192.168.1.105:8080/rest/users/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
+        deleteButton = findViewById(R.id.deleteButton);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -41,15 +42,41 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//        getUsers();
-        addButton.setOnClickListener((view -> {
-            Intent intent = new Intent(MainActivity.this, AddActivity.class);
-            startActivity(intent);
+
+        getUsers();
+
+        // Delete Button
+        deleteButton.setOnClickListener((view -> {
+            Call<Void> call = jsonPlaceHolderApi.deleteAll();
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "createPost Code: " + response.code(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Toast.makeText(MainActivity.this, "It worked  " + response.toString(), Toast.LENGTH_SHORT).show();
+                    textViewResult.setText("");
+                    getUsers();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
+                }
+            });
+
 
         }));
 
-        createPost();
+        //Add Button
+        addButton.setOnClickListener((view -> {
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            startActivity(intent);
+        }));
 
+        //Search Button
         searchButton.setOnClickListener((view -> {
             String searchTitle = searchText.getText().toString();
             Call<List<User>> call = jsonPlaceHolderApi.search(searchTitle);

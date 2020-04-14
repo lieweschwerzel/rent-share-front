@@ -1,5 +1,6 @@
 package com.example.rentshare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -57,6 +58,8 @@ public class AddActivity extends AppCompatActivity {
                     }
                     Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
 //                    getUsers();
+                    Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
 
                 @Override
