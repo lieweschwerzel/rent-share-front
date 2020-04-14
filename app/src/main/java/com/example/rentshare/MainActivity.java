@@ -43,22 +43,26 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener((view -> {
             String searchTitle = searchText.getText().toString();
             Call<List<User>> call = jsonPlaceHolderApi.search(searchTitle);
-            
+
             call.enqueue(new Callback<List<User>>() {
                 @Override
                 public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
                     if (!response.isSuccessful()) {
                         if (response.code()==404){
-                            textViewResult.setText("sorry bestaat niet");
+                            textViewResult.setText("wel iets invoeren");
                         }
+
                         else{
-                            textViewResult.setText("" + response.code());
+                            textViewResult.setText("" + response.code()+response.body());
                         }
                         return;
                     }
 
                     textViewResult.setText("");
                     List<User> users = response.body();
+                    if (users.isEmpty()){
+                        textViewResult.setText("Niets gevonden op "+searchTitle);
+                    }
 
                     for (User user : users) {
                         String content = "";
