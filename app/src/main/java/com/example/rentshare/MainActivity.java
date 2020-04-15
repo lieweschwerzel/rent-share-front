@@ -3,6 +3,10 @@ package com.example.rentshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.rentshare.model.Advert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = "http://192.168.1.105:8080/rest/advert/";
+    private String URL = "http://192.168.178.27:8080/rest/advert/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
         deleteButton = findViewById(R.id.deleteButton);
+        mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -64,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
                     textViewResult.setText("");
                     List<Advert> adverts = response.body();
+                   
+                        AdvertAdapter mAdapter = new AdvertAdapter(adverts);
+                        mRecyclerView.setAdapter(mAdapter);
+                   
                     if (adverts.isEmpty()) {
                         textViewResult.setText("Niets gevonden op " + searchTitle);
                     }
@@ -112,6 +123,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }));
+
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
+        mRecyclerView.setHasFixedSize(true);
+
+
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+
     }
 
     private void getAdverts() {
@@ -125,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 List<Advert> adverts = response.body();
+                AdvertAdapter mAdapter = new AdvertAdapter(adverts);
+                mRecyclerView.setAdapter(mAdapter);
 
                 for (Advert advert : adverts) {
                     String content = "";
@@ -148,4 +169,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
