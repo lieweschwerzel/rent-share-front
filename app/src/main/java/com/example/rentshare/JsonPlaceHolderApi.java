@@ -1,6 +1,6 @@
 package com.example.rentshare;
 
-import com.example.rentshare.model.User;
+import com.example.rentshare.model.Advert;
 
 import java.util.List;
 
@@ -13,16 +13,19 @@ import retrofit2.http.Path;
 public interface JsonPlaceHolderApi {
 
     @GET("all")
-    Call<List<User>> getUsers();
-//
-    @POST("load")
-    Call<Void> createUser(@Body User user);
+    Call<List<Advert>> getAdverts();
 
-    @GET("search/{name}")
-    Call<List<User>> search(@Path("name") String search);
+    @POST("save")
+    Call<Void> createAdvert(@Body Advert advert);
+
+    @GET("search/{title}")
+    Call<List<Advert>> search(@Path("title") String search);
 
     @GET("delete")
     Call<Void> deleteAll();
+
+//    @GET("delete/{id}")
+//    Call<List<User>> search(@Path("name") String search);
 
 
 //    @FormUrlEncoded

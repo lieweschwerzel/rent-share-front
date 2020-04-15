@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rentshare.model.User;
+import com.example.rentshare.model.Advert;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = "http://192.168.1.105:8080/rest/users/";
+    private String URL = "http://192.168.1.105:8080/rest/advert/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @Override
@@ -43,7 +43,52 @@ public class MainActivity extends AppCompatActivity {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        getUsers();
+        getAdverts();
+
+        //Search Button
+        searchButton.setOnClickListener((view -> {
+            String searchTitle = searchText.getText().toString();
+            Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle);
+
+            call.enqueue(new Callback<List<Advert>>() {
+                @Override
+                public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
+                    if (!response.isSuccessful()) {
+                        if (response.code() == 404) {
+                            textViewResult.setText("wel iets invoeren");
+                        } else {
+                            textViewResult.setText("" + response.code());
+                        }
+                        return;
+                    }
+
+                    textViewResult.setText("");
+                    List<Advert> adverts = response.body();
+                    if (adverts.isEmpty()) {
+                        textViewResult.setText("Niets gevonden op " + searchTitle);
+                    }
+
+                    for (Advert advert : adverts) {
+                        String content = "";
+                        content += "ID: " + advert.getId() + "\n";
+                        content += "Title: " + advert.getTitle() + "\n";
+                        content += "Description: " + advert.getDescription() + "\n\n";
+                        textViewResult.append(content);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Advert>> call, Throwable t) {
+                    textViewResult.setText(t.getMessage());
+                }
+            });
+        }));
+
+        //Add Button
+        addButton.setOnClickListener((view -> {
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            startActivity(intent);
+        }));
 
         // Delete Button
         deleteButton.setOnClickListener((view -> {
@@ -58,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Toast.makeText(MainActivity.this, "It worked  " + response.toString(), Toast.LENGTH_SHORT).show();
                     textViewResult.setText("");
-                    getUsers();
+                    getAdverts();
                 }
 
                 @Override
@@ -66,107 +111,40 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
                 }
             });
-
-
-        }));
-
-        //Add Button
-        addButton.setOnClickListener((view -> {
-            Intent intent = new Intent(MainActivity.this, AddActivity.class);
-            startActivity(intent);
-        }));
-
-        //Search Button
-        searchButton.setOnClickListener((view -> {
-            String searchTitle = searchText.getText().toString();
-            Call<List<User>> call = jsonPlaceHolderApi.search(searchTitle);
-
-            call.enqueue(new Callback<List<User>>() {
-                @Override
-                public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
-                    if (!response.isSuccessful()) {
-                        if (response.code() == 404) {
-                            textViewResult.setText("wel iets invoeren");
-                        } else {
-                            textViewResult.setText("" + response.code());
-                        }
-                        return;
-                    }
-
-                    textViewResult.setText("");
-                    List<User> users = response.body();
-                    if (users.isEmpty()) {
-                        textViewResult.setText("Niets gevonden op " + searchTitle);
-                    }
-
-                    for (User user : users) {
-                        String content = "";
-                        content += "ID: " + user.getId() + "\n";
-                        content += "Name: " + user.getName() + "\n";
-                        content += "Email: " + user.getEmail() + "\n\n";
-                        textViewResult.append(content);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<User>> call, Throwable t) {
-                    textViewResult.setText(t.getMessage());
-                }
-            });
         }));
     }
 
-    private void getUsers() {
-        Call<List<User>> call = jsonPlaceHolderApi.getUsers();
+    private void getAdverts() {
+        Call<List<Advert>> call = jsonPlaceHolderApi.getAdverts();
 
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<Advert>>() {
             @Override
-            public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
+            public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
                 if (!response.isSuccessful()) {
                     textViewResult.setText("code: " + response.code());
                     return;
                 }
-                List<User> users = response.body();
+                List<Advert> adverts = response.body();
 
-                for (User user : users) {
+                for (Advert advert : adverts) {
                     String content = "";
-                    content += "ID: " + user.getId() + "\n";
-                    content += "Name: " + user.getName() + "\n";
-                    content += "Email: " + user.getEmail() + "\n\n";
+                    content += "ID: " + advert.getId() + "\n";
+                    content += "Title: " + advert.getTitle() + "\n";
+                    content += "Description: " + advert.getDescription() + "\n\n";
                     textViewResult.append(content);
                 }
             }
 
+            /**
+             * Invoked when a network exception occurred talking to the server or when an unexpected
+             * exception occurred creating the request or processing the response.
+             *
+             * @param call
+             * @param t
+             */
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<Advert>> call, Throwable t) {
                 textViewResult.setText(t.getMessage());
-            }
-        });
-    }
-
-    private void createPost() {
-//        Map<String, String> fields = new HashMap<>();
-//        fields.put("name", "New Name");
-//        fields.put("email", "New email");
-        User user = new User("Jantje", "jan@jan.nl");
-        Call<Void> call = jsonPlaceHolderApi.createUser(user);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("createPost Code: " + response.code() + "\n\n");
-                    return;
-                }
-                Toast.makeText(MainActivity.this, "It worked", Toast.LENGTH_SHORT).show();
-                getUsers();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                textViewResult.setText("FAILURE " + t.getMessage() + "\n\n");
-                getUsers();
             }
         });
     }
