@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AddActivity extends AppCompatActivity {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private Button saveButton;
-    private EditText editTitle, editDescription;
+    private EditText editTitle, editDescription, editprice;
     private String URL = "http://192.168.178.27:8080/rest/advert/";
 
     @Override
@@ -29,6 +29,7 @@ public class AddActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButtonView);
         editTitle = findViewById(R.id.editTitleView);
         editDescription = findViewById(R.id.editDecriptionView);
+        editprice = findViewById(R.id.editPriceView);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -41,8 +42,10 @@ public class AddActivity extends AppCompatActivity {
         saveButton.setOnClickListener((view -> {
             String title = editTitle.getText().toString();
             String description = editDescription.getText().toString();
+            Long price = Long.parseLong(editprice.getText().toString());
 
-            Advert advert = new Advert(title, description, 8, "www.k");
+
+            Advert advert = new Advert(title, description, price, "www.k");
             System.out.println(advert.getTitle().toString());
             Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
 

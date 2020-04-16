@@ -25,10 +25,10 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String newTitle = intent.getExtras().getString("title");
         String newDescription = intent.getExtras().getString("description");
-        String newPrice = intent.getExtras().getString("price");
+        Long newPrice = intent.getExtras().getLong("price");
 
         title.setText(newTitle);
         description.setText(newDescription);
-        price.setText(newPrice);
+        price.setText(newPrice + " muntjes");
     }
 }

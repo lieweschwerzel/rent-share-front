@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/imageDetail"
+        android:layout_width="165dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/titleDetail"
+        app:layout_constraintTop_toBottomOf="@+id/titleDetail"
+        app:srcCompat="@drawable/bezem" />
 
     <TextView
         android:id="@+id/titleDetail"
@@ -16,15 +26,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageDetail"
-        android:layout_width="165dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/titleDetail"
-        app:layout_constraintTop_toBottomOf="@+id/titleDetail"
-        app:srcCompat="@drawable/bezem" />
 
     <TextView
         android:id="@+id/descriptionDetail"
