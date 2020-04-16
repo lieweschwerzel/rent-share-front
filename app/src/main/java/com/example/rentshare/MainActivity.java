@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     textViewResult.setText("");
                     List<Advert> adverts = response.body();
                    
-                        AdvertAdapter mAdapter = new AdvertAdapter(adverts);
+                        AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
                         mRecyclerView.setAdapter(mAdapter);
                    
                     if (adverts.isEmpty()) {
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 List<Advert> adverts = response.body();
-                AdvertAdapter mAdapter = new AdvertAdapter(adverts);
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
                 mRecyclerView.setAdapter(mAdapter);
 
                 for (Advert advert : adverts) {

@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddActivity"></activity>
-        <activity android:name=".ResultActivity" />
+        <activity android:name=".ResultActivity"
+                  android:label="Advertisement"/>
         <activity android:name=".AdvancedSearchActivity" />
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".RegisterActivity" />
