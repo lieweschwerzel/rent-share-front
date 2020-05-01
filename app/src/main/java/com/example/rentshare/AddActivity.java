@@ -19,7 +19,7 @@ public class AddActivity extends AppCompatActivity {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private Button saveButton;
     private EditText editTitle, editDescription, editprice;
-    private String URL = "http://192.168.178.27:8080/rest/advert/";
+    private String URL = "http://192.168.1.105:8080/rest/advert/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
