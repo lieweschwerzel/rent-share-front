@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.auth0.android.Auth0;
 import com.example.rentshare.model.Advert;
 
 import java.util.List;
@@ -24,21 +25,28 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = "http://192.168.1.105:8080/rest/advert/";
+    private String URL = "http://192.168.1.105:3010/api/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
+    private Auth0 auth0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = findViewById(R.id.text_view_result);
+//        textViewResult = findViewById(R.id.text_view_result);
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
         deleteButton = findViewById(R.id.deleteButton);
         mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
+
+        //Obtain the token from the Intent's extras
+        String accessToken = getIntent().getStringExtra(LoginActivity.EXTRA_ACCESS_TOKEN);
+        TextView textView = findViewById(R.id.searchText);
+        textView.setText(accessToken);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -66,23 +74,23 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
 
-                    textViewResult.setText("");
+//                    textViewResult.setText("");
                     List<Advert> adverts = response.body();
                    
                         AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
                         mRecyclerView.setAdapter(mAdapter);
                    
-                    if (adverts.isEmpty()) {
-                        textViewResult.setText("Niets gevonden op " + searchTitle);
-                    }
-
-                    for (Advert advert : adverts) {
-                        String content = "";
-                        content += "ID: " + advert.getId() + "\n";
-                        content += "Title: " + advert.getTitle() + "\n";
-                        content += "Description: " + advert.getDescription() + "\n\n";
-                        textViewResult.append(content);
-                    }
+//                    if (adverts.isEmpty()) {
+//                        textViewResult.setText("Niets gevonden op " + searchTitle);
+//                    }
+//
+//                    for (Advert advert : adverts) {
+//                        String content = "";
+//                        content += "ID: " + advert.getId() + "\n";
+//                        content += "Title: " + advert.getTitle() + "\n";
+//                        content += "Description: " + advert.getDescription() + "\n\n";
+//                        textViewResult.append(content);
+//                    }
                 }
 
                 @Override
@@ -136,21 +144,21 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Advert>>() {
             @Override
             public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("code: " + response.code());
-                    return;
-                }
+//                if (!response.isSuccessful()) {
+//                    textViewResult.setText("code: " + response.code());
+//                    return;
+//                }
                 List<Advert> adverts = response.body();
                 AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
                 mRecyclerView.setAdapter(mAdapter);
 
-                for (Advert advert : adverts) {
-                    String content = "";
-                    content += "ID: " + advert.getId() + "\n";
-                    content += "Title: " + advert.getTitle() + "\n";
-                    content += "Description: " + advert.getDescription() + "\n\n";
-                    textViewResult.append(content);
-                }
+//                for (Advert advert : adverts) {
+//                    String content = "";
+//                    content += "ID: " + advert.getId() + "\n";
+//                    content += "Title: " + advert.getTitle() + "\n";
+//                    content += "Description: " + advert.getDescription() + "\n\n";
+//                    textViewResult.append(content);
+//                }
             }
 
             /**
