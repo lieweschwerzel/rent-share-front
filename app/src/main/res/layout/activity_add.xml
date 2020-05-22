@@ -62,6 +62,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
 
+    <Button
+        android:id="@+id/cameraButtonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="Camera"
+        app:layout_constraintStart_toEndOf="@+id/saveButtonView"
+        app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
+
     <TextView
         android:id="@+id/textviewPrice"
         android:layout_width="163dp"
@@ -82,4 +92,14 @@
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/textviewPrice"
         app:layout_constraintTop_toBottomOf="@+id/textviewPrice" />
+
+    <ImageView
+        android:id="@+id/cameraImageView"
+        android:layout_width="242dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveButtonView"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 </android.support.constraint.ConstraintLayout>
