@@ -11,9 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentshare.model.Advert;
+import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private String URL = "http://192.168.1.105:8080/rest/advert/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
+    private static String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdfgdWIiOiJsIiwiZXhwIjoxNTkwNjIyMzIwLCJpYXQiOjE1OTA2MDQzMjB9.HDDfqAwzoVIrEP2uJ75Gd9YtG5hXCYQ-wz8wcwgXHUPuWPUy1JQr1Y84IINJUrkcLRX0w7LEtCDTM2Wujri88A";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +103,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }));
 
+
+
         // Delete Button
         deleteButton.setOnClickListener((view -> {
-            Call<Void> call = jsonPlaceHolderApi.deleteAll();
+            Call<ResponseBody> call = jsonPlaceHolderApi.deleteAll("Bearer "+token);
 
-            call.enqueue(new Callback<Void>() {
+            call.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (!response.isSuccessful()) {
                         Toast.makeText(MainActivity.this, "createPost Code: " + response.code(), Toast.LENGTH_LONG).show();
                         return;
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Void> call, Throwable t) {
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
                     Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
                 }
             });
@@ -129,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     private void getAdverts() {
         Call<List<Advert>> call = jsonPlaceHolderApi.getAdverts();

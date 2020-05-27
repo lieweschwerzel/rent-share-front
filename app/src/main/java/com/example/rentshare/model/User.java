@@ -3,13 +3,14 @@ package com.example.rentshare.model;
 public class User {
 
     private int id;
-    private String name;
-    private String email;
+    private String username;
+//    private String email;
+    private String token;
 
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public User(String username, String token) {
+        this.username = username;
+        this.token = token;
     }
 
     public int getId() {
@@ -20,20 +21,22 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 
-    public String getEmail() {
-        return email;
+
+
+    public String getToken() {
+        return token;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
