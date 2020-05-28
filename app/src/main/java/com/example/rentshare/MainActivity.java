@@ -56,45 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Search Button
         searchButton.setOnClickListener((view -> {
-            String searchTitle = searchText.getText().toString();
-            Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle);
+            searchAdverts();
+        }));
 
-            call.enqueue(new Callback<List<Advert>>() {
-                @Override
-                public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
-                    if (!response.isSuccessful()) {
-                        if (response.code() == 404) {
-                            textViewResult.setText("wel iets invoeren");
-                        } else {
-                            textViewResult.setText("" + response.code());
-                        }
-                        return;
-                    }
-
-                    textViewResult.setText("");
-                    List<Advert> adverts = response.body();
-                   
-                        AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
-                        mRecyclerView.setAdapter(mAdapter);
-                   
-                    if (adverts.isEmpty()) {
-                        textViewResult.setText("Niets gevonden op " + searchTitle);
-                    }
-
-                    for (Advert advert : adverts) {
-                        String content = "";
-                        content += "ID: " + advert.getId() + "\n";
-                        content += "Title: " + advert.getTitle() + "\n";
-                        content += "Description: " + advert.getDescription() + "\n\n";
-                        textViewResult.append(content);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<Advert>> call, Throwable t) {
-                    textViewResult.setText(t.getMessage());
-                }
-            });
+        // Delete Button
+        deleteButton.setOnClickListener((view -> {
+            deleteAll();
         }));
 
         //Add Button
@@ -103,40 +70,74 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }));
 
-
-
-        // Delete Button
-        deleteButton.setOnClickListener((view -> {
-            Call<ResponseBody> call = jsonPlaceHolderApi.deleteAll("Bearer "+ token);
-
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "createPost Code: " + response.code(), Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    Toast.makeText(MainActivity.this, "It worked  " + response.toString(), Toast.LENGTH_SHORT).show();
-                    textViewResult.setText("");
-                    getAdverts();
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
-                }
-            });
-        }));
-
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
         mRecyclerView.setHasFixedSize(true);
-
-
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
-
     }
 
+    private void deleteAll() {
+        Call<ResponseBody> call = jsonPlaceHolderApi.deleteAll("Bearer "+ token);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "createPost Code: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(MainActivity.this, "It worked  " + response.toString(), Toast.LENGTH_SHORT).show();
+                textViewResult.setText("");
+                getAdverts();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
+            }
+        });
+    }
+
+    private void searchAdverts() {
+        String searchTitle = searchText.getText().toString();
+        Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle);
+
+        call.enqueue(new Callback<List<Advert>>() {
+            @Override
+            public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
+                if (!response.isSuccessful()) {
+                    if (response.code() == 404) {
+                        textViewResult.setText("wel iets invoeren");
+                    } else {
+                        textViewResult.setText("" + response.code());
+                    }
+                    return;
+                }
+
+                textViewResult.setText("");
+                List<Advert> adverts = response.body();
+
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
+                mRecyclerView.setAdapter(mAdapter);
+
+                if (adverts.isEmpty()) {
+                    textViewResult.setText("Niets gevonden op " + searchTitle);
+                }
+
+                for (Advert advert : adverts) {
+                    String content = "";
+                    content += "ID: " + advert.getId() + "\n";
+                    content += "Title: " + advert.getTitle() + "\n";
+                    content += "Description: " + advert.getDescription() + "\n\n";
+                    textViewResult.append(content);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Advert>> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+    }
 
 
     private void getAdverts() {
