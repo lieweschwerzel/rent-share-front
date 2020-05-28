@@ -37,14 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editUserName = findViewById(R.id.editUsernameText);
-        editPassword = findViewById(R.id.editPasswordText);
+        editUserName = findViewById(R.id.editUserNameRegisterView);
+        editPassword = findViewById(R.id.editPasswordRegisterView);
+        registerButton = findViewById(R.id.registerBtn);
 
         registerButton.setOnClickListener(view -> {
             registerUser();
-
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(intent);
         });
 
     }
@@ -66,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                     System.out.println(response.body().getUsername());
                     System.out.println(response.body().getToken());
                     token = response.body().getToken();
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 

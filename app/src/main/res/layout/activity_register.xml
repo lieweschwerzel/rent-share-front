@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editPasswordView"
+        android:id="@+id/editPasswordRegisterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:labelFor="@id/editPasswordView"
+        android:labelFor="@id/editPasswordRegisterView"
         android:text="Wachtwoord"
         app:layout_constraintStart_toStartOf="@+id/addressLabel"
         app:layout_constraintTop_toBottomOf="@+id/addressStreetText" />
@@ -56,8 +56,8 @@
         android:layout_marginTop="24dp"
         android:labelFor="@id/secondPasswordText"
         android:text="Herhaal wachtwoord"
-        app:layout_constraintStart_toStartOf="@+id/editPasswordView"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordView" />
+        app:layout_constraintStart_toStartOf="@+id/editPasswordRegisterView"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordRegisterView" />
 
     <TextView
         android:id="@+id/editUsernameView"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
-        android:labelFor="@id/UserNameText"
+        android:labelFor="@id/editUserNameRegisterView"
         android:text="Gebruikersnaam"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createAccountText" />
@@ -77,8 +77,8 @@
         android:layout_marginTop="24dp"
         android:labelFor="@id/zipCodeText"
         android:text="Postcode"
-        app:layout_constraintStart_toStartOf="@+id/UserNameText"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameText" />
+        app:layout_constraintStart_toStartOf="@+id/editUserNameRegisterView"
+        app:layout_constraintTop_toBottomOf="@+id/editUserNameRegisterView" />
 
     <TextView
         android:id="@+id/addressLabel"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/zipCodeText" />
 
     <EditText
-        android:id="@+id/UserNameText"
+        android:id="@+id/editUserNameRegisterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

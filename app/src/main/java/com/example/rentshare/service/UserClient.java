@@ -15,6 +15,9 @@ public interface UserClient {
     @POST("authenticate")
     Call<User> login(@Body Login login);
 
+    @POST("register")
+    Call<User> register(@Body Login login);
+
     @GET("hello")
     Call<ResponseBody> getAll2(@Header("Authorization") String authToken);
 

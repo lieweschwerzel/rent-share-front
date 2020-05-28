@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button loginButton, registerButton;
+    private Button loginButton, goToRegisterButton;
     private EditText usernameText, passwordText;
     private static String URL = "http://192.168.1.105:8080/";
     private static String token;
@@ -39,9 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         usernameText = findViewById(R.id.editUsernameText);
         passwordText = findViewById(R.id.editPasswordText);
         loginButton = findViewById(R.id.loginBtn);
-        registerButton = findViewById(R.id.toRegisterBtn);
+        goToRegisterButton = findViewById(R.id.toRegisterBtn);
 
-        registerButton.setOnClickListener(view -> {
+        goToRegisterButton.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
