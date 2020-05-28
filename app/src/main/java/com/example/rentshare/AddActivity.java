@@ -75,11 +75,9 @@ public class AddActivity extends AppCompatActivity {
             String description = editDescription.getText().toString();
             long price = Long.parseLong((editprice.getText().toString()));
 
-
             Advert advert = new Advert(title, description, price, "www.k");
-            System.out.println(advert.getTitle().toString());
-            Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
 
+            Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {

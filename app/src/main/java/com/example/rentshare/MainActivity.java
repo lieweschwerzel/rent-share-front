@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private String URL = "http://192.168.1.105:8080/rest/advert/";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
-    private static String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdfgdWIiOiJsIiwiZXhwIjoxNTkwNjIyMzIwLCJpYXQiOjE1OTA2MDQzMjB9.HDDfqAwzoVIrEP2uJ75Gd9YtG5hXCYQ-wz8wcwgXHUPuWPUy1JQr1Y84IINJUrkcLRX0w7LEtCDTM2Wujri88A";
+    private static String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsIiwiZXhwIjoxNTkwNjIyMzIwLCJpYXQiOjE1OTA2MDQzMjB9.HDDfqAwzoVIrEP2uJ75Gd9YtG5hXCYQ-wz8wcwgXHUPuWPUy1JQr1Y84IINJUrkcLRX0w7LEtCDTM2Wujri88A";
 
 
     @Override
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Delete Button
         deleteButton.setOnClickListener((view -> {
-            Call<ResponseBody> call = jsonPlaceHolderApi.deleteAll("Bearer "+token);
+            Call<ResponseBody> call = jsonPlaceHolderApi.deleteAll("Bearer "+ token);
 
             call.enqueue(new Callback<ResponseBody>() {
                 @Override

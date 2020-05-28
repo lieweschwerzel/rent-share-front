@@ -18,9 +18,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RegisterActivity extends AppCompatActivity {
-    EditText editUserName, editPassword;
-    Button registerButton;
+public class LoginActivity extends AppCompatActivity {
+    private Button loginButton, registerButton;
+    private EditText usernameText, passwordText;
     private static String URL = "http://192.168.1.105:8080/";
     private static String token;
 
@@ -35,24 +35,30 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
-        editUserName = findViewById(R.id.editUsernameText);
-        editPassword = findViewById(R.id.editPasswordText);
+        setContentView(R.layout.activity_login);
+        usernameText = findViewById(R.id.editUsernameText);
+        passwordText = findViewById(R.id.editPasswordText);
+        loginButton = findViewById(R.id.loginBtn);
+        registerButton = findViewById(R.id.toRegisterBtn);
 
         registerButton.setOnClickListener(view -> {
-            registerUser();
-
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
+        loginButton.setOnClickListener(v -> {
+            loginUser();
+
+        });
     }
 
-    public void registerUser() {
-        // register new user with the given information
-        String user = editUserName.getText().toString();
-        String password = editPassword.getText().toString();
+
+    // try to login with the given credentials
+    // if successful redirect to the homepage
+    // if not show toast with error message
+    public void loginUser() {
+    String user = usernameText.getText().toString();
+    String password = passwordText.getText().toString();
 
 
         Login login = new Login(user, password);
@@ -62,21 +68,35 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "USER BESTAAT en heeft token \n " + response.body().getToken(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "USER BESTAAT en heeft token \n " + response.body().getToken(), Toast.LENGTH_SHORT).show();
                     System.out.println(response.body().getUsername());
                     System.out.println(response.body().getToken());
                     token = response.body().getToken();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+
+    public void ToRegisterActivity(View view) {
+        Intent intent = new Intent();
+        // redirect to registerActivity
+    }
+
 }
+
+
+
+
+
+

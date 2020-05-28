@@ -5,34 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".LogInActivity">
+    tools:context=".LoginActivity">
 
     <Button
         android:id="@+id/toRegisterBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:onClick="ToRegisterActivity"
         android:text="Registreren"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="tryLogIn"
+        android:layout_marginTop="8dp"
         android:text="Inloggen"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordText" />
 
     <EditText
-        android:id="@+id/passwordTextLogin"
+        android:id="@+id/editPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -42,7 +42,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/editUsernameText" />
 
     <ImageView
         android:id="@+id/logoImage"
@@ -58,7 +58,6 @@
         android:id="@+id/notRegisteredTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Nog niet geregistreerd?"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/toRegisterBtn"
@@ -66,10 +65,9 @@
         app:layout_constraintStart_toStartOf="@+id/toRegisterBtn" />
 
     <EditText
-        android:id="@+id/userNameText"
+        android:id="@+id/editUsernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="Gebruikersnaam"
         android:inputType="textPersonName"
