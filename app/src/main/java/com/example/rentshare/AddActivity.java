@@ -1,7 +1,6 @@
 package com.example.rentshare;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,10 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.rentshare.model.Advert;
-import com.example.rentshare.model.Login;
-import com.example.rentshare.model.User;
 import com.example.rentshare.service.JsonPlaceHolderApi;
-import com.example.rentshare.service.UserClient;
 
 import com.bumptech.glide.Glide;
 import java.io.File;
@@ -26,7 +22,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,24 +57,18 @@ public class AddActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        saveButton.setOnClickListener((view -> {
-            saveNewAdvert();
-        }));
 
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dispatchTakePictureIntent();
-            }
-        });
+        saveButton.setOnClickListener(view -> saveAdvert());
+
+        cameraButton.setOnClickListener(view -> dispatchTakePictureIntent());
     }
 
-    private void saveNewAdvert() {
+    private void saveAdvert() {
         String title = editTitle.getText().toString();
         String description = editDescription.getText().toString();
         long price = Long.parseLong((editprice.getText().toString()));
 
-        Advert advert = new Advert(title, description, price, "www.k");
+        Advert advert = new Advert(title, description, price, currentPhotoPath);
 
         Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
         call.enqueue(new Callback<Void>() {
