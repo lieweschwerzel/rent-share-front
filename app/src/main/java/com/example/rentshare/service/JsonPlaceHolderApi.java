@@ -14,16 +14,16 @@ import retrofit2.http.Path;
 
 public interface JsonPlaceHolderApi {
 
-    @GET("/rest/advert/all")
+    @GET("/advert/all")
     Call<List<Advert>> getAdverts();
 
-    @POST("/rest/advert/save")
+    @POST("/advert/save")
     Call<Void> createAdvert(@Body Advert advert);
 
-    @GET("/rest/advert/search/{title}")
+    @GET("/advert/search/{title}")
     Call<List<Advert>> search(@Path("title") String search);
 
-    @GET("/rest/advert/delete")
+    @GET("/advert/delete")
     Call<ResponseBody> deleteAll(@Header("Authorization") String authToken);
 
 //    @GET("delete/{id}")

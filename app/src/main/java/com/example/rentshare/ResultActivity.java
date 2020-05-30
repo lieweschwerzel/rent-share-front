@@ -29,6 +29,6 @@ public class ResultActivity extends AppCompatActivity {
 
         title.setText(newTitle);
         description.setText(newDescription);
-        price.setText(newPrice + " muntjes");
+        price.setText(newPrice + "€ per dag");
     }
 }

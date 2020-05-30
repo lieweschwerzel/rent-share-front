@@ -43,10 +43,8 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
         Advert advert = mAdverts.get(i);
         viewHolder.title.setText(advert.getTitle());
         viewHolder.description.setText(advert.getDescription());
-        viewHolder.price.setText(advert.getPrice() + "");
+        viewHolder.price.setText(advert.getPrice() + "€");
 //        viewHolder.image.setImageResource(R.drawable.bezem);
-
-//        String url = tupperMeal.getUrl();
         Glide.with(context).load(advert.getImageUrl()).into(viewHolder.image);
     }
 

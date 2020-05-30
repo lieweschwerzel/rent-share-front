@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentshare.model.Advert;
@@ -15,7 +16,6 @@ import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +24,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textViewResult;
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
     private String URL = "http://192.168.1.105:8080/rest/advert/";
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = findViewById(R.id.text_view_result);
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 Toast.makeText(MainActivity.this, "It worked  " + response.toString(), Toast.LENGTH_SHORT).show();
-                textViewResult.setText("");
                 getAdverts();
             }
 
@@ -106,21 +103,21 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
                 if (!response.isSuccessful()) {
                     if (response.code() == 404) {
-                        textViewResult.setText("wel iets invoeren");
+//                        textViewResult.setText("wel iets invoeren");
                     } else {
-                        textViewResult.setText("" + response.code());
+//                        textViewResult.setText("" + response.code());
                     }
                     return;
                 }
 
-                textViewResult.setText("");
+//                textViewResult.setText("");
                 List<Advert> adverts = response.body();
 
                 AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
                 mRecyclerView.setAdapter(mAdapter);
 
                 if (adverts.isEmpty()) {
-                    textViewResult.setText("Niets gevonden op " + searchTitle);
+//                    textViewResult.setText("Niets gevonden op " + searchTitle);
                 }
 
                 for (Advert advert : adverts) {
@@ -128,13 +125,13 @@ public class MainActivity extends AppCompatActivity {
                     content += "ID: " + advert.getId() + "\n";
                     content += "Title: " + advert.getTitle() + "\n";
                     content += "Description: " + advert.getDescription() + "\n\n";
-                    textViewResult.append(content);
+//                    textViewResult.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Advert>> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+//                textViewResult.setText(t.getMessage());
             }
         });
     }
@@ -147,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Advert>> call, retrofit2.Response<List<Advert>> response) {
                 if (!response.isSuccessful()) {
-                    textViewResult.setText("code: " + response.code());
+//                    textViewResult.setText("code: " + response.code());
                     return;
                 }
                 List<Advert> adverts = response.body();
@@ -159,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     content += "ID: " + advert.getId() + "\n";
                     content += "Title: " + advert.getTitle() + "\n";
                     content += "Description: " + advert.getDescription() + "\n\n";
-                    textViewResult.append(content);
+//                    textViewResult.append(content);
                 }
             }
 
@@ -172,9 +169,34 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onFailure(Call<List<Advert>> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+//                textViewResult.setText(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settingsmenu:
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.signoutmenu:
+                signOut2();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void signOut2(){
     }
 
 }
