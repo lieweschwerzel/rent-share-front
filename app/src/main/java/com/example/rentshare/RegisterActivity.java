@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
-
     UserClient userClient = retrofit.create(UserClient.class);
 
     @Override
@@ -62,14 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
                     loginUser();
                 } else {
                     Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -86,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
                     token = response.body().getToken();
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    intent.putExtra("token", token);
                     startActivity(intent);
                 } else {
                     Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();

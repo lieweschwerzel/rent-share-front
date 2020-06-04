@@ -17,6 +17,7 @@ import com.example.rentshare.model.Advert;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,8 @@ public class AddActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String currentPhotoPath = null;
-    private String URL = "http://192.168.1.105:8080/";
+    private String URL = "http://192.168.1.105:8080";
+    private static String token = null;
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(URL)
@@ -46,7 +48,6 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-
         saveButton = findViewById(R.id.saveButtonView);
         cameraButton = findViewById(R.id.cameraButtonView);
         editTitle = findViewById(R.id.editTitleView);
@@ -54,12 +55,13 @@ public class AddActivity extends AppCompatActivity {
         editprice = findViewById(R.id.editPriceView);
         imageView = findViewById(R.id.cameraImageView);
 
+        Intent intentToken = getIntent();
+        token = intentToken.getExtras().getString("token");
+
         Retrofit retrofit = builder.build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-
         saveButton.setOnClickListener(view -> saveAdvert());
-
         cameraButton.setOnClickListener(view -> dispatchTakePictureIntent());
     }
 
@@ -81,6 +83,7 @@ public class AddActivity extends AppCompatActivity {
                 }
                 Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
 
@@ -93,12 +96,6 @@ public class AddActivity extends AppCompatActivity {
 
 
     private void dispatchTakePictureIntent() {
-
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -121,22 +118,13 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_IMAGE_CAPTURE) {
-//            Glide.with(this).load(currentPhotoPath).into(imageView);
-//            System.out.println(currentPhotoPath);
-//        }
-//    }
-@Override
-protected void onActivityResult(int requestCode, int resultCode,
-                                Intent data) {
-    if (requestCode == REQUEST_IMAGE_CAPTURE) {
-        //don't compare the data to null, it will always come as  null because we are providing a file URI, so load with the imageFilePath we obtained before opening the cameraIntent
-        Glide.with(this).load(currentPhotoPath).into(imageView);
-        System.out.println("liewe" + currentPhotoPath);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            Glide.with(this).load(currentPhotoPath).into(imageView);
+        }
     }
-}
 
 
     private File createImageFile() throws IOException {

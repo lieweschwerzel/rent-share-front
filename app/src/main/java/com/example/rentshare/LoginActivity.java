@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton, goToRegisterButton;
     private EditText usernameText, passwordText;
-    private static String URL = "http://192.168.1.105:8080/";
+    private static String URL = "http://192.168.1.105:8080";
     private static String token;
 
     Retrofit.Builder builder = new Retrofit.Builder()
@@ -60,11 +60,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
-                    System.out.println(response.body().getUsername());
-                    System.out.println(response.body().getToken());
                     token = response.body().getToken();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("token", token);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();

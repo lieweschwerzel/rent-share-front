@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 public interface JsonPlaceHolderApi {
 
     @GET("/advert/all")
-    Call<List<Advert>> getAdverts();
+    Call<List<Advert>> getAdverts(@Header("Authorization") String authToken);
 
     @POST("/advert/save")
     Call<Void> createAdvert(@Body Advert advert);

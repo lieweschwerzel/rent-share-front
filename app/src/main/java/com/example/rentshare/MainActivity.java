@@ -26,10 +26,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = "http://192.168.1.105:8080/rest/advert/";
+    private String URL = "http://192.168.1.105:8080";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
-    private static String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsIiwiZXhwIjoxNTkwNjIyMzIwLCJpYXQiOjE1OTA2MDQzMjB9.HDDfqAwzoVIrEP2uJ75Gd9YtG5hXCYQ-wz8wcwgXHUPuWPUy1JQr1Y84IINJUrkcLRX0w7LEtCDTM2Wujri88A";
+    private static String token = null;
 
 
     @Override
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         searchText = findViewById(R.id.searchText);
         deleteButton = findViewById(R.id.deleteButton);
         mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
+
+        Intent intentToken = getIntent();
+        token = intentToken.getExtras().getString("token");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //Add Button
         addButton.setOnClickListener((view -> {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            intent.putExtra("token", token);
             startActivity(intent);
         }));
 
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getAdverts() {
-        Call<List<Advert>> call = jsonPlaceHolderApi.getAdverts();
+        Call<List<Advert>> call = jsonPlaceHolderApi.getAdverts(token);
 
         call.enqueue(new Callback<List<Advert>>() {
             @Override
