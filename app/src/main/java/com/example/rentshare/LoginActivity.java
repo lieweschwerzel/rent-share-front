@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "USER BESTAAT en heeft token \n " + response.body().getToken(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
                     System.out.println(response.body().getUsername());
                     System.out.println(response.body().getToken());
                     token = response.body().getToken();

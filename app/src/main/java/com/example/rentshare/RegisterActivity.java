@@ -52,20 +52,14 @@ public class RegisterActivity extends AppCompatActivity {
         String user = editUserName.getText().toString();
         String password = editPassword.getText().toString();
 
-
         Login login = new Login(user, password);
-        Call<User> call = userClient.login(login);
+        Call<User> call = userClient.register(login);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "USER BESTAAT en heeft token \n " + response.body().getToken(), Toast.LENGTH_SHORT).show();
-                    System.out.println(response.body().getUsername());
-                    System.out.println(response.body().getToken());
-                    token = response.body().getToken();
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    loginUser();
                 } else {
                     Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 
@@ -79,4 +73,30 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void loginUser() {
+        String user = editUserName.getText().toString();
+        String password = editPassword.getText().toString();
+        Login login = new Login(user, password);
+        Call<User> call = userClient.login(login);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
+                    token = response.body().getToken();
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, "USER BESTAAT NIET!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

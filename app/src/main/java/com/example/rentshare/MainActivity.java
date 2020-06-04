@@ -197,6 +197,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut2(){
+        token = null;
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }
