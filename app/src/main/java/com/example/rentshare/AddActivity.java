@@ -37,7 +37,7 @@ public class AddActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String currentPhotoPath = null;
-    private String URL = "http://192.168.1.105:8080";
+    private String URL = "http://192.168.1.105:8080/";
     private static String token = null;
 
     Retrofit.Builder builder = new Retrofit.Builder()
