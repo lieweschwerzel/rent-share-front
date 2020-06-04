@@ -6,4 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <TextView
+        android:id="@+id/createAccountText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Profiel"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addressNumberProfile"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/addressEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountText2" />
+
+    <TextView
+        android:id="@+id/zipCodeLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:labelFor="@id/zipCodeText"
+        android:text="Postcode"
+        app:layout_constraintStart_toStartOf="@+id/addressEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/addressEditProfile" />
+
+    <TextView
+        android:id="@+id/cityProfileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:labelFor="@id/zipCodeText"
+        android:text="Stad"
+        app:layout_constraintStart_toStartOf="@+id/zipcodeEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/zipcodeEditProfile" />
+
+    <EditText
+        android:id="@+id/addressEditProfile"
+        android:layout_width="237dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/addressProfileView"
+        app:layout_constraintTop_toBottomOf="@+id/addressProfileView" />
+
+    <Button
+        android:id="@+id/registerBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+
+        android:text="Opslaan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zipcodeEditProfile2"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <TextView
+        android:id="@+id/addressProfileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
+        android:labelFor="@id/addressStreetText"
+        android:text="Straatnaam en huisnummer"
+        app:layout_constraintStart_toStartOf="@+id/userNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/userNameProfile" />
+
+    <TextView
+        android:id="@+id/userNameProfile"
+        android:layout_width="123dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+
+        android:text="Username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountText2" />
+
+    <EditText
+        android:id="@+id/zipcodeEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Postcode"
+        app:layout_constraintStart_toStartOf="@+id/zipCodeLabel2"
+        app:layout_constraintTop_toBottomOf="@+id/zipCodeLabel2" />
+
+    <EditText
+        android:id="@+id/zipcodeEditProfile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Stad"
+        app:layout_constraintStart_toStartOf="@+id/cityProfileView"
+        app:layout_constraintTop_toBottomOf="@+id/cityProfileView" />
 </android.support.constraint.ConstraintLayout>

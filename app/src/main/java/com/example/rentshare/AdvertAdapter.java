@@ -83,6 +83,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                         intent.putExtra("title", onClickedAdvert.getTitle());
                         intent.putExtra("description", onClickedAdvert.getDescription());
                         intent.putExtra("price", onClickedAdvert.getPrice());
+                        intent.putExtra("imageUrl", onClickedAdvert.getImageUrl());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

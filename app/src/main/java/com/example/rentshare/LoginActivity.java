@@ -27,9 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create());
-
     Retrofit retrofit = builder.build();
-
     UserClient userClient = retrofit.create(UserClient.class);
 
     @Override
@@ -48,22 +46,16 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> {
             loginUser();
-
         });
     }
-
-
     // try to login with the given credentials
     // if successful redirect to the homepage
     // if not show toast with error message
     public void loginUser() {
     String user = usernameText.getText().toString();
     String password = passwordText.getText().toString();
-
-
         Login login = new Login(user, password);
         Call<User> call = userClient.login(login);
-
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
