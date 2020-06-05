@@ -46,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         retrofit = builder.build();
         userClient = retrofit.create(UserClient.class);
 
-
     }
 
     public void registerUser(View view) {

@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -31,6 +32,7 @@ import com.example.rentshare.service.JsonPlaceHolderApi;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -350,6 +352,15 @@ public class MainActivity extends AppCompatActivity {
                         gpsText.setText(addresses.get(0).getLocality() + "\n"
                                 + addresses.get(0).getAddressLine(0));
                         gpsText.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "over 5 seconden redirect naar maps", Toast.LENGTH_LONG).show();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                        intent.putExtra("latitude", latitude);
+                        intent.putExtra("longitude", longitude);
+                        startActivity(intent);
+                    }, 5000);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
