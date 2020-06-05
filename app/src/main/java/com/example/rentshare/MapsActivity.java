@@ -38,9 +38,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.addMarker(new MarkerOptions()
                 .position(test)
                 .title("Mijn huis")).showInfoWindow();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(test));
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-        googleMap.animateCamera(zoom);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(test, 16));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 }
