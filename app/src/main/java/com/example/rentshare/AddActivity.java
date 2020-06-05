@@ -37,23 +37,23 @@ public class AddActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String currentPhotoPath = null;
-    private String URL = "http://192.168.1.105:8080/";
     private static String token = null;
-
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl(URL)
-            .addConverterFactory(GsonConverterFactory.create());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        String URL = this.getResources().getString(R.string.server);
         saveButton = findViewById(R.id.saveButtonView);
         cameraButton = findViewById(R.id.cameraButtonView);
         editTitle = findViewById(R.id.editTitleView);
         editDescription = findViewById(R.id.editDecriptionView);
         editprice = findViewById(R.id.editPriceView);
         imageView = findViewById(R.id.cameraImageView);
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create());
 
         Intent intentToken = getIntent();
         token = intentToken.getExtras().getString("token");

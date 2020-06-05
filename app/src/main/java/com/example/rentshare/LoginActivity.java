@@ -21,23 +21,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton, goToRegisterButton;
     private EditText usernameText, passwordText;
-    private static String URL = "http://192.168.1.105:8080/";
     private static String token;
 
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl(URL)
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    UserClient userClient = retrofit.create(UserClient.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        String URL = this.getResources().getString(R.string.server);
         usernameText = findViewById(R.id.editUsernameText);
         passwordText = findViewById(R.id.editPasswordText);
         loginButton = findViewById(R.id.loginBtn);
         goToRegisterButton = findViewById(R.id.toRegisterBtn);
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        UserClient userClient = retrofit.create(UserClient.class);
 
         goToRegisterButton.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -45,38 +46,37 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(v -> {
-            loginUser();
+            String user = usernameText.getText().toString();
+            String password = passwordText.getText().toString();
+            Login login = new Login(user, password);
+            Call<User> call = userClient.login(login);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.isSuccessful()) {
+                        token = response.body().getToken();
+                        System.out.println("HIER"+ response.body().getId());
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
         });
     }
     // try to login with the given credentials
     // if successful redirect to the homepage
     // if not show toast with error message
-    public void loginUser() {
-    String user = usernameText.getText().toString();
-    String password = passwordText.getText().toString();
-        Login login = new Login(user, password);
-        Call<User> call = userClient.login(login);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    token = response.body().getToken();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("token", token);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
     public void ToRegisterActivity(View view) {
         Intent intent = new Intent();
