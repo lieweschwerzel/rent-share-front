@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = getString(R.string.server);
+
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
     private static String token = null;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        String URL = getString(R.string.server);
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
         searchText = findViewById(R.id.searchText);
