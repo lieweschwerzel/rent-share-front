@@ -32,8 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
         editZipcode = findViewById(R.id.zipCodeRegisterText);
         editAddressStreet = findViewById(R.id.addressStreetRegisterText);
         editAddressNumber = findViewById(R.id.addressNumberRegisterText);
-        String URL = this.getResources().getString(R.string.server);
         registerButton = findViewById(R.id.registerBtn);
+        String URL = this.getResources().getString(R.string.server);
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -44,10 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener(view -> {
             // register new user with the given information
-            String user = editUserName.getText().toString();
+            String userName = editUserName.getText().toString();
             String password = editPassword.getText().toString();
+            String zipcode = editZipcode.getText().toString();
+            String addressStreet = editAddressStreet.getText().toString();
+            int addressNumber = Integer.parseInt(editAddressNumber.getText().toString());
 
-            Login login = new Login(user, password);
+            Login login = new Login(userName, password, zipcode, addressStreet, addressNumber);
             Call<User> call = userClient.register(login);
 
             call.enqueue(new Callback<User>() {
@@ -76,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                         });
                     } else {
                         Toast.makeText(RegisterActivity.this, "error!!", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 

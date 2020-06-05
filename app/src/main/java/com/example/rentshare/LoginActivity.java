@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(v -> {
-            String user = usernameText.getText().toString();
+            String userName = usernameText.getText().toString();
             String password = passwordText.getText().toString();
-            Login login = new Login(user, password);
+            Login login = new Login(userName, password);
             Call<User> call = userClient.login(login);
             call.enqueue(new Callback<User>() {
                 @Override
