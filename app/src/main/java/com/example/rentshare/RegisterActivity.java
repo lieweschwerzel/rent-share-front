@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterActivity extends AppCompatActivity {
     EditText editUserName, editPassword;
     Button registerButton;
-    private static String URL = "http://192.168.1.105:8080/";
+    private String URL = getString(R.string.server);;
     private static String token;
 
     Retrofit.Builder builder = new Retrofit.Builder()

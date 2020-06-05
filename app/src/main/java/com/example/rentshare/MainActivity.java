@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private EditText searchText;
     private Button searchButton, addButton, deleteButton;
-    private String URL = "http://192.168.1.105:8080/";
+    private String URL = getString(R.string.server);
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
     private static String token = null;
