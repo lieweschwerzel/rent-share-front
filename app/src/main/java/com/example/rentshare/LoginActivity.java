@@ -22,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton, goToRegisterButton;
     private EditText usernameText, passwordText;
     private static String token;
+    Retrofit.Builder builder;
+    Retrofit retrofit;
+    UserClient userClient;
 
 
     @Override
@@ -34,53 +37,45 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginBtn);
         goToRegisterButton = findViewById(R.id.toRegisterBtn);
 
-        Retrofit.Builder builder = new Retrofit.Builder()
+        builder = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-        UserClient userClient = retrofit.create(UserClient.class);
+        retrofit = builder.build();
+        userClient = retrofit.create(UserClient.class);
 
-        goToRegisterButton.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        });
+    }
 
-        loginButton.setOnClickListener(v -> {
-            String userName = usernameText.getText().toString();
-            String password = passwordText.getText().toString();
-            Login login = new Login(userName, password);
-            Call<User> call = userClient.login(login);
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful()) {
-                        token = response.body().getToken();
-                        System.out.println("HIER"+ response.body().getId());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("token", token);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
+    public void logIn(View view) {
+        String userName = usernameText.getText().toString();
+        String password = passwordText.getText().toString();
+        Login login = new Login(userName, password);
+        Call<User> call = userClient.login(login);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    token = response.body().getToken();
+                    System.out.println("HIER"+ response.body().getId());
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("token", token);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
+
+            }
         });
     }
-    // try to login with the given credentials
-    // if successful redirect to the homepage
-    // if not show toast with error message
 
-
-    public void ToRegisterActivity(View view) {
-        Intent intent = new Intent();
-        // redirect to registerActivity
+    public void GoToRegister(View view) {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 
 }
