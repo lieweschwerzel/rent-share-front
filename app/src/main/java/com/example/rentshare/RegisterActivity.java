@@ -3,7 +3,6 @@ package com.example.rentshare;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText editUserName, editPassword;
+    EditText editUserName, editPassword, editZipcode, editAddressStreet ,editAddressNumber;
     Button registerButton;
     private static String URL = "http://192.168.1.105:8080/";
     private static String token;
@@ -36,8 +35,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editUserName = findViewById(R.id.editUserNameRegisterView);
-        editPassword = findViewById(R.id.editPasswordRegisterView);
+        editUserName = findViewById(R.id.userNameRegisterText);
+        editPassword = findViewById(R.id.firstPasswordRegisterText);
+        editZipcode = findViewById(R.id.zipCodeRegisterText);
+        editAddressStreet = findViewById(R.id.addressStreetRegisterText);
+        editAddressNumber = findViewById(R.id.addressNumberRegisterText);
         registerButton = findViewById(R.id.registerBtn);
 
         registerButton.setOnClickListener(view -> {

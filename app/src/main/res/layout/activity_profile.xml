@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:labelFor="@id/zipCodeText"
+        android:labelFor="@id/zipCodeRegisterText"
         android:text="Postcode"
         app:layout_constraintStart_toStartOf="@+id/addressEditProfile"
         app:layout_constraintTop_toBottomOf="@+id/addressEditProfile" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:labelFor="@id/zipCodeText"
+        android:labelFor="@id/zipCodeRegisterText"
         android:text="Stad"
         app:layout_constraintStart_toStartOf="@+id/zipcodeEditProfile"
         app:layout_constraintTop_toBottomOf="@+id/zipcodeEditProfile" />
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
 
-        android:labelFor="@id/addressStreetText"
+        android:labelFor="@id/addressStreetRegisterText"
         android:text="Straatnaam en huisnummer"
         app:layout_constraintStart_toStartOf="@+id/userNameProfile"
         app:layout_constraintTop_toBottomOf="@+id/userNameProfile" />
