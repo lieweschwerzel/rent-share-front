@@ -1,4 +1,4 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.rentshare.R;
 import com.example.rentshare.model.Login;
 import com.example.rentshare.model.User;
 import com.example.rentshare.service.UserClient;

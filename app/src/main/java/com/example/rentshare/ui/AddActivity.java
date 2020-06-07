@@ -1,4 +1,4 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,12 +7,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 

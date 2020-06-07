@@ -1,9 +1,13 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.rentshare.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,5 +44,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .title("Mijn huis")).showInfoWindow();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(test, 16));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+
+    public void toMail(View view) {
+        Intent intent = new Intent(MapsActivity.this, MailActivity.class);
+        startActivity(intent);
     }
 }

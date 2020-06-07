@@ -1,4 +1,4 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
 
 import java.util.List;

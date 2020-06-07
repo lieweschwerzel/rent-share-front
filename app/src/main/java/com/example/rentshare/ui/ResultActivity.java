@@ -1,4 +1,4 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.rentshare.R;
 
 public class ResultActivity extends AppCompatActivity {
 

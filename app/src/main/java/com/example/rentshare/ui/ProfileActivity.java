@@ -1,7 +1,9 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.rentshare.R;
 
 public class ProfileActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.rentshare;
+package com.example.rentshare.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -21,18 +21,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
