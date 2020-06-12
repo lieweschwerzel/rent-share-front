@@ -29,7 +29,6 @@ public class MailActivity extends AppCompatActivity {
         new MailTask(this.getApplication()).execute();
 
         Toast.makeText(this, "Mail gestuurd", Toast.LENGTH_LONG).show();
-
     }
 
     private static class MailTask extends AsyncTask<Void, Void, Void> {

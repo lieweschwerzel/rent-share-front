@@ -13,6 +13,8 @@ import com.example.rentshare.model.Login;
 import com.example.rentshare.model.User;
 import com.example.rentshare.service.UserClient;
 
+import java.time.LocalDateTime;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         String addressStreet = editAddressStreet.getText().toString();
         int addressNumber = Integer.parseInt(editAddressNumber.getText().toString());
 
-        Login login = new Login(userName, password, zipcode, addressStreet, addressNumber);
+        Login login = new Login(userName, password, zipcode, addressStreet, addressNumber, LocalDateTime.now().toString());
         Call<User> call = userClient.register(login);
 
         call.enqueue(new Callback<User>() {

@@ -46,8 +46,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    public void toMail(View view) {
-        Intent intent = new Intent(MapsActivity.this, MailActivity.class);
-        startActivity(intent);
-    }
 }

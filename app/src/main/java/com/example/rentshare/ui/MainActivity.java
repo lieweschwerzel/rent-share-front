@@ -228,6 +228,16 @@ public class MainActivity extends AppCompatActivity {
         checkGpsPermissions();
     }
 
+    public void onClickMail(View view) {
+            Intent intent = new Intent(MainActivity.this, MailActivity.class);
+            startActivity(intent);
+    }
+
+    public void onClickTimer(View view) {
+        Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+        startActivity(intent);
+    }
+
     public void checkGpsPermissions() {
 
         if (ContextCompat.checkSelfPermission(MainActivity.this,

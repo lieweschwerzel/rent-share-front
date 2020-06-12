@@ -20,7 +20,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button loginButton, goToRegisterButton;
     private EditText usernameText, passwordText;
     private static String token;
     Retrofit.Builder builder;
@@ -35,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         String URL = this.getResources().getString(R.string.server);
         usernameText = findViewById(R.id.editUsernameText);
         passwordText = findViewById(R.id.editPasswordText);
-        loginButton = findViewById(R.id.loginBtn);
-        goToRegisterButton = findViewById(R.id.toRegisterBtn);
 
         builder = new Retrofit.Builder()
                 .baseUrl(URL)

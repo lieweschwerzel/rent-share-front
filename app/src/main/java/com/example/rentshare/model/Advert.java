@@ -1,5 +1,7 @@
 package com.example.rentshare.model;
 
+import java.time.LocalDateTime;
+
 public class Advert {
 
     private int id;
@@ -10,6 +12,8 @@ public class Advert {
     private String latitude;
     private String longitude;
     private long userId;
+    private String createdOn;
+    private int duration;
 
     public Advert(String title, String description, long price, String imageUrl) {
         this.title = title;
@@ -18,7 +22,7 @@ public class Advert {
         this.imageUrl = imageUrl;
     }
 
-    public Advert(String title, String description, long price, String imageUrl, String latitude, String longitude, long userId) {
+    public Advert(String title, String description, long price, String imageUrl, String latitude, String longitude, long userId, String createdOn, int duration) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -26,6 +30,8 @@ public class Advert {
         this.latitude = latitude;
         this.longitude = longitude;
         this.userId = userId;
+        this.createdOn = createdOn;
+        this.duration = duration;
     }
 
     public int getId() {
@@ -79,4 +85,20 @@ public class Advert {
     public long getUserId() { return userId; }
 
     public void setUserId(long userId) { this.userId = userId; }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 }

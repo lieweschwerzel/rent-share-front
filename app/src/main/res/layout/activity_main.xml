@@ -116,8 +116,28 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:onClick="onClickGps"
-        android:text="GPS"
+        android:text="GPS en Maps"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/advertRecycler" />
+
+    <Button
+        android:id="@+id/mailTestBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="onClickMail"
+        android:text="Mail"
+        app:layout_constraintStart_toEndOf="@+id/gpsTestBtn"
+        app:layout_constraintTop_toTopOf="@+id/gpsTestBtn" />
+
+    <Button
+        android:id="@+id/testTimerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="onClickTimer"
+        android:text="Timer"
+        app:layout_constraintStart_toEndOf="@+id/mailTestBtn"
+        app:layout_constraintTop_toTopOf="@+id/mailTestBtn" />
 
 </android.support.constraint.ConstraintLayout>
