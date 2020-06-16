@@ -35,7 +35,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
             Context context = viewGroup.getContext();
 
             LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.cardview, viewGroup, false);
+            View view = inflater.inflate(R.layout.cardview2, viewGroup, false);
 
             AdvertViewholder viewHolder = new AdvertViewholder(view);
             return viewHolder;
@@ -72,10 +72,10 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
 
             public AdvertViewholder(View itemView) {
                 super(itemView);
-                title = itemView.findViewById(R.id.titleText);
-                description = itemView.findViewById(R.id.descriptionText);
-                price = itemView.findViewById(R.id.priceText);
-                image = itemView.findViewById(R.id.advertisementImage);
+                title = itemView.findViewById(R.id.titleTextCard2);
+                description = itemView.findViewById(R.id.descriptionTextCard2);
+                price = itemView.findViewById(R.id.priceTextCard2);
+                image = itemView.findViewById(R.id.advertisementImageCard2);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
