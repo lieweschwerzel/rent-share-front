@@ -71,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        userNameText.setText("Welkom gebruiker: " + userName);
+        userNameText.setText("Welkom gebruiker: \n" + userName);
 
         saveButton.setOnClickListener(view -> saveAdvert());
         cameraButton.setOnClickListener(view -> dispatchTakePictureIntent());
