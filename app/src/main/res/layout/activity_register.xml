@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegisterActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/createAccountLabel"
+        android:id="@+id/createAccountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Account aanmaken"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,133 +18,134 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/firstPasswordRegisterText"
+        android:id="@+id/editPasswordRegisterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/firstPasswordRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/firstPasswordRegisterLabel"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="@+id/firstPasswordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/firstPasswordLabel" />
 
     <EditText
-        android:id="@+id/secondPasswordRegisterText"
+        android:id="@+id/secondPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/secondPasswordRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/secondPasswordRegisterLabel"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="@+id/secondPasswordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/secondPasswordLabel" />
 
     <TextView
-        android:id="@+id/firstPasswordRegisterLabel"
+        android:id="@+id/firstPasswordLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:labelFor="@id/firstPasswordRegisterText"
+        android:labelFor="@id/editPasswordRegisterView"
         android:text="Wachtwoord"
-        app:layout_constraintStart_toStartOf="@+id/addressRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/addressStreetRegisterText" />
+        app:layout_constraintStart_toStartOf="@+id/addressLabel"
+        app:layout_constraintTop_toBottomOf="@+id/editStreetRegister" />
 
     <TextView
-        android:id="@+id/secondPasswordRegisterLabel"
+        android:id="@+id/secondPasswordLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:labelFor="@id/secondPasswordRegisterText"
+        android:labelFor="@id/secondPasswordText"
         android:text="Herhaal wachtwoord"
-        app:layout_constraintStart_toStartOf="@+id/firstPasswordRegisterText"
-        app:layout_constraintTop_toBottomOf="@+id/firstPasswordRegisterText" />
+        app:layout_constraintStart_toStartOf="@+id/editPasswordRegisterView"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordRegisterView" />
 
     <TextView
-        android:id="@+id/usernameRegisterLabel"
+        android:id="@+id/editUsernameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
-        android:labelFor="@id/userNameRegisterText"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/editUserNameRegisterView"
         android:text="Gebruikersnaam"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/createAccountText" />
 
     <TextView
-        android:id="@+id/zipCodeRegisterLabel"
+        android:id="@+id/zipCodeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:labelFor="@id/zipCodeRegisterText"
+        android:labelFor="@id/editZipcodeRegister"
         android:text="Postcode"
-        app:layout_constraintStart_toStartOf="@+id/userNameRegisterText"
-        app:layout_constraintTop_toBottomOf="@+id/userNameRegisterText" />
+        app:layout_constraintStart_toStartOf="@+id/editUserNameRegisterView"
+        app:layout_constraintTop_toBottomOf="@+id/editUserNameRegisterView" />
 
     <TextView
-        android:id="@+id/addressRegisterLabel"
+        android:id="@+id/addressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:labelFor="@id/addressStreetRegisterText"
+        android:labelFor="@id/editStreetRegister"
         android:text="Straatnaam en huisnummer"
-        app:layout_constraintStart_toStartOf="@+id/zipCodeRegisterText"
-        app:layout_constraintTop_toBottomOf="@+id/zipCodeRegisterText" />
+        app:layout_constraintStart_toStartOf="@+id/editZipcodeRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editZipcodeRegister" />
 
     <EditText
-        android:id="@+id/userNameRegisterText"
+        android:id="@+id/editUserNameRegisterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/usernameRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/usernameRegisterLabel"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="@+id/editUsernameView"
+        app:layout_constraintTop_toBottomOf="@+id/editUsernameView" />
 
     <EditText
-        android:id="@+id/addressStreetRegisterText"
+        android:id="@+id/editStreetRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPostalAddress"
-        app:layout_constraintStart_toStartOf="@+id/addressRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/addressRegisterLabel"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="@+id/addressLabel"
+        app:layout_constraintTop_toBottomOf="@+id/addressLabel" />
 
     <EditText
-        android:id="@+id/addressNumberRegisterText"
+        android:id="@+id/editStreetNumberRegister"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/addressStreetRegisterText"
-        app:layout_constraintStart_toEndOf="@+id/addressStreetRegisterText"
-        app:layout_constraintTop_toTopOf="@+id/addressStreetRegisterText" />
+        app:layout_constraintBottom_toBottomOf="@+id/editStreetRegister"
+        app:layout_constraintStart_toEndOf="@+id/editStreetRegister"
+        app:layout_constraintTop_toTopOf="@+id/editStreetRegister" />
 
     <EditText
-        android:id="@+id/zipCodeRegisterText"
+        android:id="@+id/editZipcodeRegister"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/zipCodeRegisterLabel"
-        app:layout_constraintTop_toBottomOf="@+id/zipCodeRegisterLabel"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="@+id/zipCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/zipCodeLabel" />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
         android:onClick="registerUser"
         android:text="Registreren"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondPasswordRegisterText" />
+        app:layout_constraintTop_toBottomOf="@+id/secondPasswordText" />
 </android.support.constraint.ConstraintLayout>

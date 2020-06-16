@@ -34,11 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editUserName = findViewById(R.id.userNameRegisterText);
-        editPassword = findViewById(R.id.firstPasswordRegisterText);
-        editZipcode = findViewById(R.id.zipCodeRegisterText);
-        editAddressStreet = findViewById(R.id.addressStreetRegisterText);
-        editAddressNumber = findViewById(R.id.addressNumberRegisterText);
+        editUserName = findViewById(R.id.editUserNameRegisterView);
+        editPassword = findViewById(R.id.editPasswordRegisterView);
+        editZipcode = findViewById(R.id.editZipcodeRegister);
+        editAddressStreet = findViewById(R.id.editStreetRegister);
+        editAddressNumber = findViewById(R.id.editStreetNumberRegister);
         registerButton = findViewById(R.id.registerBtn);
         String URL = this.getResources().getString(R.string.server);
 
