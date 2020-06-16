@@ -35,7 +35,7 @@ public class TimerActivity extends AppCompatActivity {
 
         timerText = findViewById(R.id.timerTextDetails);
 
-        Advert advert = new Advert("advert", "description", 50, "http://", "100", "100", 5, LocalDateTime.now().toString(), 12);
+        //Advert advert = new Advert("advert", "description", 50, "http://", 100, "100", 5, LocalDateTime.now().toString(), 12);
         //jsonPlaceHolderApi.createAdvert(advert);
 
         now = LocalDateTime.now();
