@@ -3,13 +3,17 @@ package com.example.rentshare.service;
 import com.example.rentshare.model.Advert;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 
 public interface JsonPlaceHolderApi {
@@ -43,4 +47,11 @@ public interface JsonPlaceHolderApi {
 //    @FormUrlEncoded
 //    @POST("load")
 //    Call<User> createUser(@FieldMap Map<String, String> fields);
+
+    @Multipart
+    @POST("images/upload_image.php")
+    Call<ServerResponse> upload(
+            @Header("Authorization") String authorization,
+            @PartMap Map<String, RequestBody> map
+    );
 }
