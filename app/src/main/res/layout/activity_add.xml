@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AddActivity">
@@ -91,26 +94,24 @@
         android:id="@+id/saveButtonView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Opslaan"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
+        app:layout_constraintStart_toStartOf="@+id/gpsBtn"
+        app:layout_constraintTop_toBottomOf="@+id/locationText" />
 
     <Button
         android:id="@+id/cameraButtonView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Camera"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/saveButtonView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toEndOf="@+id/saveButtonView"
-        app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
+        app:layout_constraintTop_toTopOf="@+id/saveButtonView" />
 
     <ImageView
         android:id="@+id/cameraImageView"
@@ -118,6 +119,7 @@
         android:layout_height="153dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="104dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -126,4 +128,27 @@
         app:layout_constraintVertical_bias="0.052"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+    <Button
+        android:id="@+id/gpsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="onClickGps"
+        android:text="Locatie bepalen"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/editPriceView"
+        app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
+
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/gpsBtn"
+        app:layout_constraintTop_toBottomOf="@+id/gpsBtn" />
+
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
