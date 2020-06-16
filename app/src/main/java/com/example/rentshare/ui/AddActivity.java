@@ -2,14 +2,12 @@ package com.example.rentshare.ui;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,28 +16,17 @@ import android.widget.Toast;
 
 import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
-import com.example.rentshare.service.ApiConfig;
-import com.example.rentshare.service.AppConfig;
-import com.example.rentshare.service.ServerResponse;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import com.bumptech.glide.Glide;
 
 import org.joda.time.LocalDateTime;
 
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,6 +87,7 @@ public class AddActivity extends AppCompatActivity {
 
 
         Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn, advertOwner);
+
         Call<Void> call = jsonPlaceHolderApi.createAdvert(advert, "Bearer " + token);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -152,7 +140,6 @@ public class AddActivity extends AppCompatActivity {
                                     Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             Glide.with(this).load(currentPhotoPath).into(imageView);
-            uploadFile();
         }
     }
 
@@ -173,41 +160,4 @@ public class AddActivity extends AppCompatActivity {
         System.out.println(currentPhotoPath.toString());
         return image;
     }
-
-    // Uploading Image/Video
-    private void uploadFile() {
-
-        // Map is used to multipart the file using okhttp3.RequestBody
-        Map<String, RequestBody> map = new HashMap<>();
-        File file = new File(currentPhotoPath);
-
-        // Parsing any Media type file
-        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-        map.put("file\"; filename=\"" + file.getName() + "\"", requestBody);
-        ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
-        Call<ServerResponse> call = getResponse.upload("token", map);
-        call.enqueue(new Callback<ServerResponse>() {
-            @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-//                        hidepDialog();
-                        ServerResponse serverResponse = response.body();
-                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                } else {
-//                    hidepDialog();
-                    Toast.makeText(getApplicationContext(), "problem uploading image", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-//                hidepDialog();
-                Log.v("Response gotten is", t.getMessage());
-            }
-        });
-    }
 }
-
