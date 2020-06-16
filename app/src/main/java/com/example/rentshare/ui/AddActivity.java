@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +49,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        getSupportActionBar().setTitle("Voeg een Advertentie toe");
         String URL = this.getResources().getString(R.string.server);
         saveButton = findViewById(R.id.saveButtonView);
         cameraButton = findViewById(R.id.cameraButtonView);
@@ -69,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        userNameText.setText(userName);
+        userNameText.setText("Welkom gebruiker: " + userName);
 
         saveButton.setOnClickListener(view -> saveAdvert());
         cameraButton.setOnClickListener(view -> dispatchTakePictureIntent());
@@ -80,12 +82,13 @@ public class AddActivity extends AppCompatActivity {
         String description = editDescription.getText().toString();
         long price = Long.parseLong((editprice.getText().toString()));
         String createdOn = LocalDateTime.now().toString();
+        String advertOwner = userName;
         System.out.println(createdOn);
 
 
-        Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn);
+        Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn, advertOwner);
 
-        Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
+        Call<Void> call = jsonPlaceHolderApi.createAdvert(advert, "Bearer " + token);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -97,6 +100,7 @@ public class AddActivity extends AppCompatActivity {
                 Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 intent.putExtra("token", token);
+                intent.putExtra("username", userName);
                 startActivity(intent);
             }
 

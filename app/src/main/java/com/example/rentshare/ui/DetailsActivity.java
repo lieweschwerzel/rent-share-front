@@ -20,15 +20,18 @@ import org.joda.time.Seconds;
 public class DetailsActivity extends AppCompatActivity {
     LocalDateTime now;
     LocalDateTime expirationDate;
-    private TextView timerText;
+    private TextView timerText, adOwnerTextView;
     private CountDownTimer countDownTimer;
     int hoursLeft;
     int minutesLeft;
     int secondsLeft;
     volatile long millisecondsLeft;
+    private static LocalDateTime createdOn = null;
 
     private TextView title, description, price;
     private ImageView image;
+    private String userName;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +39,27 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.advert_details_layout);
 
         timerText = findViewById(R.id.timerTextDetails);
-
-
-        title = findViewById(R.id.titleDetail);
+        adOwnerTextView = findViewById(R.id.adOwnerDetailsview);
+        title = findViewById(R.id.titleDetailview);
         description = findViewById(R.id.descriptionDetail);
         price = findViewById(R.id.priceDetail);
         image = findViewById(R.id.imageDetail);
 
-
         Intent intent = getIntent();
         String newTitle = intent.getExtras().getString("title");
         String newDescription = intent.getExtras().getString("description");
+        String adOwner = intent.getExtras().getString("adowner");
         Long newPrice = intent.getExtras().getLong("price");
         Glide.with(getApplicationContext()).load(intent.getExtras().getString("imageUrl")).into(image);
-        LocalDateTime createdOn = LocalDateTime.parse(intent.getExtras().getString("createdOn"));
+        createdOn = LocalDateTime.parse(intent.getExtras().getString("createdOn"));
+
 //        LocalDateTime createdOn = LocalDateTime.parse("2020-06-17T03:05:05.409");
 
         title.setText(newTitle);
         description.setText(newDescription);
         price.setText(newPrice + "€ per dag");
+        adOwnerTextView.setText("Verhuurd door: "+adOwner);
+
 
         now = LocalDateTime.now();
         int duration = 24;
@@ -84,6 +89,15 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }.start();
         }
+
+    }
+
+    public void directReservation(View view) {
+//        Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+//        intent.putExtra("username", userName);
+//        intent.putExtra("token", token);
+        finish();
     }
 
     private void refreshTimer() {

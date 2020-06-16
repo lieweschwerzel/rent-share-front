@@ -10,93 +10,63 @@
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="onClickSearchButton"
         android:text="search"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/searchText"
+        tools:layout_editor_absoluteY="8dp" />
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="45dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="onClickAddButton"
         android:text="add"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/nestedScrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/searchButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
 
     <Button
         android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="46dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="onClickDeleteButton"
         android:text="delete"
         android:textColor="@android:color/background_light"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/addButton"
-        tools:visibility="invisible" />
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/searchText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
+        android:layout_width="284dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:autofillHints="@android:string/search_go"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
-        android:layout_width="17dp"
-        android:layout_height="63dp"
-
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchText">
-
-        <TextView
-            android:id="@+id/text_view_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </android.support.v4.widget.NestedScrollView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/advertRecycler"
         android:layout_width="384dp"
         android:layout_height="400dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton"
+        tools:layout_editor_absoluteX="11dp" />
 
     <TextView
         android:id="@+id/gpsTestText"

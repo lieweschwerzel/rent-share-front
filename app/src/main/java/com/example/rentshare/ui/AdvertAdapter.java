@@ -20,11 +20,13 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
 
         private List<Advert> mAdverts;
         private Context context;
+        private String token;
 
 
-    public AdvertAdapter(Context context, List<Advert> mAdverts) {
+    public AdvertAdapter(Context context, List<Advert> mAdverts, String token) {
             this.context = context;
             this.mAdverts = mAdverts;
+            this.token = token;
         }
 
         @NonNull
@@ -86,6 +88,8 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                         intent.putExtra("price", onClickedAdvert.getPrice());
                         intent.putExtra("imageUrl", onClickedAdvert.getImageUrl());
                         intent.putExtra("createdOn", onClickedAdvert.getCreatedOn());
+                        intent.putExtra("adowner", onClickedAdvert.getAdvertOwner());
+                        intent.putExtra("token", token);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

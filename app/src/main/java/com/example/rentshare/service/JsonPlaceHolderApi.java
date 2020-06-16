@@ -18,7 +18,7 @@ public interface JsonPlaceHolderApi {
     Call<List<Advert>> getAdverts(@Header("Authorization") String authToken);
 
     @POST("advert/save")
-    Call<Void> createAdvert(@Body Advert advert);
+    Call<Void> createAdvert(@Body Advert advert, @Header("Authorization") String authToken);
 
     @GET("advert/search/{title}")
     Call<List<Advert>> search(@Path("title") String search);

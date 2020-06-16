@@ -10,20 +10,29 @@
         android:id="@+id/imageDetail"
         android:layout_width="165dp"
         android:layout_height="174dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/timerTextDetails"
-        app:layout_constraintTop_toBottomOf="@+id/timerTextDetails"
+        app:layout_constraintStart_toStartOf="@+id/adOwnerDetailsview"
+        app:layout_constraintTop_toBottomOf="@+id/adOwnerDetailsview"
         app:srcCompat="@drawable/bezem" />
 
     <TextView
-        android:id="@+id/titleDetail"
+        android:id="@+id/adOwnerDetailsview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="owner"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/titleDetailview"
+        app:layout_constraintTop_toBottomOf="@+id/titleDetailview" />
+
+    <TextView
+        android:id="@+id/titleDetailview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="18sp"
+        android:text="AdvertTitle"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +42,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/OmschrijvingTextView"
         app:layout_constraintTop_toBottomOf="@+id/OmschrijvingTextView" />
 
@@ -50,20 +60,19 @@
         android:id="@+id/reservationBtn"
         android:layout_width="203dp"
         android:layout_height="58dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
+        android:onClick="directReservation"
         android:text="Reserveer Direct"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/priceDetail"
-        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
+        app:layout_constraintStart_toStartOf="@+id/timerTextDetails"
+        app:layout_constraintTop_toBottomOf="@+id/timerTextDetails" />
 
     <TextView
         android:id="@+id/prijsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Prijs:"
         app:layout_constraintStart_toStartOf="@+id/descriptionDetail"
         app:layout_constraintTop_toBottomOf="@+id/descriptionDetail" />
@@ -75,6 +84,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="Omschrijving: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
 
@@ -82,10 +92,10 @@
         android:id="@+id/timerTextDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:text="00:00"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/titleDetail"
-        app:layout_constraintTop_toBottomOf="@+id/titleDetail" />
+        app:layout_constraintStart_toStartOf="@+id/priceDetail"
+        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
 </android.support.constraint.ConstraintLayout>

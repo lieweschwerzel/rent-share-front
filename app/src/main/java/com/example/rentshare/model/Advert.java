@@ -12,15 +12,17 @@ public class Advert {
     private String latitude;
     private String longitude;
     private long userId;
+    private String advertOwner;
     private String createdOn;
     private int duration;
 
-    public Advert(String title, String description, long price, String imageUrl, String createdOn) {
+    public Advert(String title, String description, long price, String imageUrl, String createdOn,   String advertOwner) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
         this.createdOn = createdOn;
+        this.advertOwner = advertOwner;
     }
 
     public Advert(String title, String description, long price, String imageUrl, String latitude, String longitude, long userId, String createdOn, int duration) {
@@ -33,6 +35,15 @@ public class Advert {
         this.userId = userId;
         this.createdOn = createdOn;
         this.duration = duration;
+    }
+
+
+    public String getAdvertOwner() {
+        return advertOwner;
+    }
+
+    public void setAdvertOwner(String advertOwner) {
+        this.advertOwner = advertOwner;
     }
 
     public int getId() {

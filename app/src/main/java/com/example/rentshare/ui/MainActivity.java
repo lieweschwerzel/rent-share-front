@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         token = intentToken.getExtras().getString("token");
         userName = intentToken.getExtras().getString("username");
 
+        getSupportActionBar().setTitle("Rentshare: " + userName);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -90,22 +92,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUserId() {
-        Call<ResponseBody> call3 = userClient.getUserId(userName);
-        call3.enqueue(new Callback<ResponseBody>() {
+        Call<Void> call3 = userClient.getUserId(userName);
+        call3.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<ResponseBody> call3, Response<ResponseBody> response) {
+            public void onResponse(Call<Void> call3, Response<Void> response) {
                 if (response.isSuccessful()) {
                     String userId = response.body().toString();
                     System.out.println(userId);
-
                 } else {
                     Toast.makeText(MainActivity.this, "error!!", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> response, Throwable t) {
+            public void onFailure(Call<Void> response, Throwable t) {
                 Toast.makeText(MainActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
 
             }
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 //                textViewResult.setText("");
                 List<Advert> adverts = response.body();
 
-                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token);
                 mRecyclerView.setAdapter(mAdapter);
 
                 if (adverts.isEmpty()) {
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 List<Advert> adverts = response.body();
-                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts);
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token);
                 mRecyclerView.setAdapter(mAdapter);
 
                 for (Advert advert : adverts) {
