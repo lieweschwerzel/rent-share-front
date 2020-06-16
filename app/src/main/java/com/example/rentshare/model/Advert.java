@@ -9,8 +9,8 @@ public class Advert {
     private String description;
     private long price;
     private String imageUrl;
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
     private long userId;
     private String advertOwner;
     private String createdOn;
@@ -25,18 +25,7 @@ public class Advert {
         this.advertOwner = advertOwner;
     }
 
-    public Advert(String title, String description, long price, String imageUrl, String createdOn, String advertOwner, double latitude, double longitude) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.createdOn = createdOn;
-        this.advertOwner = advertOwner;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public Advert(String title, String description, long price, String imageUrl, double latitude, double longitude, long userId, String createdOn, int duration) {
+    public Advert(String title, String description, long price, String imageUrl, String latitude, String longitude, long userId, String createdOn, int duration) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -97,13 +86,13 @@ public class Advert {
         this.imageUrl = imageUrl;
     }
 
-    public double getLatitude() { return latitude; }
+    public String getLatitude() { return latitude; }
 
-    public void setLatitude(double latitude) { this.latitude = latitude; }
+    public void setLatitude(String latitude) { this.latitude = latitude; }
 
-    public double getLongitude() { return longitude; }
+    public String getLongitude() { return longitude; }
 
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    public void setLongitude(String longitude) { this.longitude = longitude; }
 
     public long getUserId() { return userId; }
 

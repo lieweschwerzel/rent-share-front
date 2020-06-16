@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -55,6 +52,7 @@
         android:layout_height="59dp"
         android:text="TextView"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/prijsTextView"
         app:layout_constraintTop_toBottomOf="@+id/prijsTextView" />
 
@@ -67,9 +65,8 @@
         android:onClick="directReservation"
         android:text="Reserveer Direct"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
+        app:layout_constraintStart_toStartOf="@+id/timerTextDetails"
+        app:layout_constraintTop_toBottomOf="@+id/timerTextDetails" />
 
     <TextView
         android:id="@+id/prijsTextView"
@@ -77,8 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Prijs:"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/descriptionDetail"
         app:layout_constraintTop_toBottomOf="@+id/descriptionDetail" />
 
@@ -90,7 +85,6 @@
         android:layout_marginTop="16dp"
         android:text="Omschrijving: "
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
 
@@ -98,25 +92,10 @@
         android:id="@+id/timerTextDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="00:00"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageDetail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageDetail" />
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationBtn"
-        tools:context="com.example.rentshare.ui.MapsActivity" />
+        app:layout_constraintStart_toStartOf="@+id/priceDetail"
+        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
 </android.support.constraint.ConstraintLayout>
-</ScrollView>

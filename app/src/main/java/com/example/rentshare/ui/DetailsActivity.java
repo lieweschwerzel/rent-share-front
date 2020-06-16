@@ -11,19 +11,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rentshare.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.joda.time.Hours;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 
-public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class DetailsActivity extends AppCompatActivity {
     LocalDateTime now;
     LocalDateTime expirationDate;
     private TextView timerText, adOwnerTextView;
@@ -33,8 +27,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     int secondsLeft;
     volatile long millisecondsLeft;
     private static LocalDateTime createdOn = null;
-    double latitude;
-    double longitude;
 
     private TextView title, description, price;
     private ImageView image;
@@ -57,8 +49,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         String newTitle = intent.getExtras().getString("title");
         String newDescription = intent.getExtras().getString("description");
         String adOwner = intent.getExtras().getString("adowner");
-        latitude = intent.getExtras().getDouble("latitude");
-        longitude = intent.getExtras().getDouble("longitude");
         Long newPrice = intent.getExtras().getLong("price");
         Glide.with(getApplicationContext()).load(intent.getExtras().getString("imageUrl")).into(image);
         createdOn = LocalDateTime.parse(intent.getExtras().getString("createdOn"));
@@ -67,12 +57,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         title.setText(newTitle);
         description.setText(newDescription);
-        price.setText("€" + newPrice + " per dag");
+        price.setText(newPrice + "€ per dag");
         adOwnerTextView.setText("Verhuurd door: "+adOwner);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
 
         now = LocalDateTime.now();
@@ -106,16 +92,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng latLng = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title("Locatie adverteerder")).showInfoWindow();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
-    }
-
     public void directReservation(View view) {
 //        Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
         Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
@@ -143,8 +119,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         if (secondsLeft < 10) {
             timeLeft.append("0").append(secondsLeft);
         } else timeLeft.append(secondsLeft);
-
-        timeLeft.append(" resterend");
 
         timerText.setText(timeLeft);
 

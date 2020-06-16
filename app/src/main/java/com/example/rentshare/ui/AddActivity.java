@@ -1,28 +1,15 @@
 package com.example.rentshare.ui;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,8 +35,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -70,12 +57,6 @@ public class AddActivity extends AppCompatActivity {
     private String currentPhotoPath = null;
     private static String token = null;
     private static String userName = null;
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    LocationManager locationManager;
-    LocationListener locationListener;
-    Double latitude;
-    Double longitude;
-    private TextView locationText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +71,6 @@ public class AddActivity extends AppCompatActivity {
         editprice = findViewById(R.id.editPriceView);
         imageView = findViewById(R.id.cameraImageView);
         userNameText = findViewById(R.id.advertOwnerIUserNameAdd);
-        locationText = findViewById(R.id.locationText);
 
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -111,43 +91,38 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void saveAdvert() {
-
-        if (latitude == null || longitude == null) {
-            Toast.makeText(this, "Zorg ervoor dat je je locatie meegeeft", Toast.LENGTH_LONG).show();
-        } else {
-            String title = editTitle.getText().toString();
-            String description = editDescription.getText().toString();
-            long price = Long.parseLong((editprice.getText().toString()));
-            String createdOn = LocalDateTime.now().toString();
-            String advertOwner = userName;
-            System.out.println(createdOn);
+        String title = editTitle.getText().toString();
+        String description = editDescription.getText().toString();
+        long price = Long.parseLong((editprice.getText().toString()));
+        String createdOn = LocalDateTime.now().toString();
+        String advertOwner = userName;
+        System.out.println(createdOn);
 
 
-            Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn, advertOwner, latitude, longitude);
+        Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn, advertOwner);
+        Call<Void> call = jsonPlaceHolderApi.createAdvert(advert, "Bearer " + token);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
-            Call<Void> call = jsonPlaceHolderApi.createAdvert(advert, "Bearer " + token);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(AddActivity.this, "error code: " + response.code(), Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddActivity.this, MainActivity.class);
-                    intent.putExtra("token", token);
-                    intent.putExtra("username", userName);
-                    startActivity(intent);
+                if (!response.isSuccessful()) {
+                    Toast.makeText(AddActivity.this, "error code: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
                 }
+                Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
+                intent.putExtra("username", userName);
+                startActivity(intent);
+            }
 
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(AddActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
-                }
-            });
-        }
-        }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(AddActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
+            }
+        });
+    }
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

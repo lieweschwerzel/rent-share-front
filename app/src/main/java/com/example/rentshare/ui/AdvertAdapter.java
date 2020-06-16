@@ -89,8 +89,6 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                         intent.putExtra("imageUrl", onClickedAdvert.getImageUrl());
                         intent.putExtra("createdOn", onClickedAdvert.getCreatedOn());
                         intent.putExtra("adowner", onClickedAdvert.getAdvertOwner());
-                        intent.putExtra("latitude", onClickedAdvert.getLatitude());
-                        intent.putExtra("longitude", onClickedAdvert.getLongitude());
                         intent.putExtra("token", token);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);

@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         String URL = getString(R.string.server);
         searchText = findViewById(R.id.searchText);
         mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
+        gpsText = findViewById(R.id.gpsTestText);
 
         Intent intentToken = getIntent();
         token = intentToken.getExtras().getString("token");
@@ -255,6 +256,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickGps(View view) {
+        checkGpsPermissions();
+    }
+
     public void onClickMail(View view) {
             Intent intent = new Intent(MainActivity.this, MailActivity.class);
             startActivity(intent);
@@ -265,4 +270,142 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void checkGpsPermissions() {
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Toestemming is geweigerd
+            // Alertdialog weergeven om toestemming te vragen gps te gebruiken
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Toestemming nodig")
+                        .setMessage("Toestemming is nodig om GPS-functie te kunnen gebruiken")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(MainActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                            }
+
+                        })
+                        .setNegativeButton("Annuleren", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+
+            } else {
+                // vragen om toestemming
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
+        } else
+        // toestemming is gegeven
+        {
+            UseGps();
+        }
+    }
+
+    private void UseGps() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            // als GPS is uitgeschakeld vragen deze aan te zetten
+            final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                showAlertGpsDisabled();
+            }
+
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+
+                        // stoppen met GPS gebruiken
+                        locationManager.removeUpdates(locationListener);
+
+                        UtilizeCoordinates();
+                    } else {
+                        if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                            Toast.makeText(MainActivity.this, "Geen locatie gevonden", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    // stoppen met GPS gebruiken
+                    locationManager.removeUpdates(locationListener);
+                }
+
+                public void onProviderEnabled(String provider) {
+                }
+
+                public void onProviderDisabled(String provider) {
+                    // stoppen met GPS gebruiken
+                    locationManager.removeUpdates(locationListener);
+                }
+            };
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+    }
+
+    public void showAlertGpsDisabled() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Het lijkt erop dat GPS is uitgeschakeld, wil je GPS nu inschakelen?")
+                .setCancelable(false)
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+
+                })
+                .setNegativeButton("Nee", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void UtilizeCoordinates() {
+
+            try {
+                Geocoder geo = new Geocoder(this.getApplicationContext(), Locale.getDefault());
+                List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
+
+                if (addresses.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Geen adres gevonden op basis van coordinaten", Toast.LENGTH_LONG).show();
+                } else {
+                        gpsText.setText(addresses.get(0).getLocality() + "\n"
+                                + addresses.get(0).getAddressLine(0));
+                        gpsText.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "over 5 seconden redirect naar maps", Toast.LENGTH_LONG).show();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                        intent.putExtra("latitude", latitude);
+                        intent.putExtra("longitude", longitude);
+                        startActivity(intent);
+                    }, 5000);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 }
