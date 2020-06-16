@@ -26,7 +26,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.ResultActivity" />
+        <activity android:name=".ui.DetailsActivity" />
         <activity android:name=".ui.AdvancedSearchActivity" />
         <activity android:name=".ui.HomeScreenActivity" />
         <activity android:name=".ui.RegisterActivity" />

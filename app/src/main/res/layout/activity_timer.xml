@@ -7,7 +7,7 @@
     tools:context=".ui.TimerActivity">
 
     <TextView
-        android:id="@+id/timerText"
+        android:id="@+id/timerTextDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"

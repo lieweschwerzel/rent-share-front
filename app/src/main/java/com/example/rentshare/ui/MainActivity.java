@@ -27,7 +27,9 @@ import android.widget.Toast;
 
 import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
+import com.example.rentshare.model.User;
 import com.example.rentshare.service.JsonPlaceHolderApi;
+import com.example.rentshare.service.UserClient;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView mRecyclerView;
     private static String token = null;
+    private static String userName = null;
     Retrofit retrofit;
+    UserClient userClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intentToken = getIntent();
         token = intentToken.getExtras().getString("token");
+        userName = intentToken.getExtras().getString("username");
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
         getAdverts();
+//        getUserId();
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
         mRecyclerView.setHasFixedSize(true);
@@ -82,9 +89,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void getUserId() {
+        Call<ResponseBody> call3 = userClient.getUserId(userName);
+        call3.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call3, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    String userId = response.body().toString();
+                    System.out.println(userId);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "error!!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> response, Throwable t) {
+                Toast.makeText(MainActivity.this, "USER BESTAAT NIET!!!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
     public void onClickAddButton(View view) {
         Intent intent = new Intent(MainActivity.this, AddActivity.class);
         intent.putExtra("token", token);
+        intent.putExtra("username", userName);
         startActivity(intent);
     }
 

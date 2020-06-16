@@ -27,7 +27,7 @@ public interface JsonPlaceHolderApi {
     Call<List<Advert>> getAdvertsByUserId(@Path("userId") Long userId);
 
     @GET("advert/delete")
-    Call<ResponseBody> deleteAll(@Header("Authorization") String authToken);
+        Call<ResponseBody> deleteAll(@Header("Authorization") String authToken);
 
 //    @GET("delete/{id}")
 //    Call<List<User>> search(@Path("name") String search);

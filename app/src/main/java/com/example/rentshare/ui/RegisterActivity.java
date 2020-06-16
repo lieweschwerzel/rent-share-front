@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
                                 token = response.body().getToken();
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                intent.putExtra("username", userName);
                                 intent.putExtra("token", token);
                                 startActivity(intent);
                             } else {

@@ -33,7 +33,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
             Context context = viewGroup.getContext();
 
             LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.advertisement_layout, viewGroup, false);
+            View view = inflater.inflate(R.layout.cardview, viewGroup, false);
 
             AdvertViewholder viewHolder = new AdvertViewholder(view);
             return viewHolder;
@@ -80,11 +80,12 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                     public void onClick(View v) {
                         int position = getAdapterPosition();
                         Advert onClickedAdvert = mAdverts.get(position);
-                        Intent intent = new Intent(context, ResultActivity.class);
+                        Intent intent = new Intent(context, DetailsActivity.class);
                         intent.putExtra("title", onClickedAdvert.getTitle());
                         intent.putExtra("description", onClickedAdvert.getDescription());
                         intent.putExtra("price", onClickedAdvert.getPrice());
                         intent.putExtra("imageUrl", onClickedAdvert.getImageUrl());
+                        intent.putExtra("createdOn", onClickedAdvert.getCreatedOn());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

@@ -15,11 +15,12 @@ public class Advert {
     private String createdOn;
     private int duration;
 
-    public Advert(String title, String description, long price, String imageUrl) {
+    public Advert(String title, String description, long price, String imageUrl, String createdOn) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.createdOn = createdOn;
     }
 
     public Advert(String title, String description, long price, String imageUrl, String latitude, String longitude, long userId, String createdOn, int duration) {

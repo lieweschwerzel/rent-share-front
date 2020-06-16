@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     token = response.body().getToken();
                     System.out.println("HIER"+ response.body().getId());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("username", userName);
                     intent.putExtra("token", token);
                     startActivity(intent);
                 } else {

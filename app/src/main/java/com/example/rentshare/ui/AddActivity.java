@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentshare.R;
@@ -17,6 +18,8 @@ import com.example.rentshare.model.Advert;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import com.bumptech.glide.Glide;
+
+import org.joda.time.LocalDateTime;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +36,13 @@ public class AddActivity extends AppCompatActivity {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private Button saveButton, cameraButton;
     private EditText editTitle, editDescription, editprice;
+    private TextView userNameText;
     private ImageView imageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String currentPhotoPath = null;
     private static String token = null;
+    private static String userName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,8 @@ public class AddActivity extends AppCompatActivity {
         editDescription = findViewById(R.id.editDecriptionView);
         editprice = findViewById(R.id.editPriceView);
         imageView = findViewById(R.id.cameraImageView);
+        userNameText = findViewById(R.id.advertOwnerIUserNameAdd);
+
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -57,9 +64,12 @@ public class AddActivity extends AppCompatActivity {
 
         Intent intentToken = getIntent();
         token = intentToken.getExtras().getString("token");
+        userName = intentToken.getExtras().getString("username");
 
         Retrofit retrofit = builder.build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        userNameText.setText(userName);
 
         saveButton.setOnClickListener(view -> saveAdvert());
         cameraButton.setOnClickListener(view -> dispatchTakePictureIntent());
@@ -69,8 +79,11 @@ public class AddActivity extends AppCompatActivity {
         String title = editTitle.getText().toString();
         String description = editDescription.getText().toString();
         long price = Long.parseLong((editprice.getText().toString()));
+        String createdOn = LocalDateTime.now().toString();
+        System.out.println(createdOn);
 
-        Advert advert = new Advert(title, description, price, currentPhotoPath);
+
+        Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn);
 
         Call<Void> call = jsonPlaceHolderApi.createAdvert(advert);
         call.enqueue(new Callback<Void>() {

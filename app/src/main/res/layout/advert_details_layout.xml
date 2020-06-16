@@ -10,22 +10,21 @@
         android:id="@+id/imageDetail"
         android:layout_width="165dp"
         android:layout_height="174dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleDetail"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/timerTextDetails"
+        app:layout_constraintTop_toBottomOf="@+id/timerTextDetails"
         app:srcCompat="@drawable/bezem" />
 
     <TextView
         android:id="@+id/titleDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +50,7 @@
         android:id="@+id/reservationBtn"
         android:layout_width="203dp"
         android:layout_height="58dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="96dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Reserveer Direct"
         android:textColor="@android:color/background_light"
@@ -74,7 +73,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Omschrijving: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
+
+    <TextView
+        android:id="@+id/timerTextDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="00:00"
+        android:textSize="36sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/titleDetail"
+        app:layout_constraintTop_toBottomOf="@+id/titleDetail" />
 </android.support.constraint.ConstraintLayout>

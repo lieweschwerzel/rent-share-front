@@ -7,54 +7,84 @@
     tools:context=".ui.AddActivity">
 
     <EditText
-        android:id="@+id/editTitleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="title"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
         android:id="@+id/editDecriptionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="description"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="163dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="Title"
+        android:id="@+id/textView4"
+        android:layout_width="150dp"
+        android:layout_height="31dp"
+        android:text="Description"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTitleView"
+        app:layout_constraintTop_toBottomOf="@+id/editTitleView" />
+
+    <EditText
+        android:id="@+id/editPriceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="price"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textviewPrice"
+        app:layout_constraintTop_toBottomOf="@+id/textviewPrice" />
+
+    <TextView
+        android:id="@+id/textviewPrice"
+        android:layout_width="156dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="32dp"
+        android:text="Price"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editDecriptionView"
+        app:layout_constraintTop_toBottomOf="@+id/editDecriptionView" />
+
+    <EditText
+        android:id="@+id/editTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="title"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/advertOwnerIUserNameAdd"
+        android:layout_width="146dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:text="username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="163dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="Description"
+        android:id="@+id/textView"
+        android:layout_width="151dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="20dp"
+        android:text="Title"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTitleView" />
+        app:layout_constraintStart_toStartOf="@+id/advertOwnerIUserNameAdd"
+        app:layout_constraintTop_toBottomOf="@+id/advertOwnerIUserNameAdd" />
 
     <Button
         android:id="@+id/saveButtonView"
@@ -77,31 +107,6 @@
         app:layout_constraintStart_toEndOf="@+id/saveButtonView"
         app:layout_constraintTop_toBottomOf="@+id/editPriceView" />
 
-    <TextView
-        android:id="@+id/textviewPrice"
-        android:layout_width="163dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="Price"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDecriptionView" />
-
-    <EditText
-        android:id="@+id/editPriceView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="price"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textviewPrice" />
-
     <ImageView
         android:id="@+id/cameraImageView"
         android:layout_width="242dp"
@@ -112,4 +117,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButtonView"
         app:srcCompat="@drawable/ic_launcher_foreground" />
+
 </android.support.constraint.ConstraintLayout>
