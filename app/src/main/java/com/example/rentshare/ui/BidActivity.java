@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BidActivity extends AppCompatActivity {
 
     String username;
-    static int advertId;
+    static Long advertId;
     static String token;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     Retrofit retrofit;
@@ -43,7 +43,7 @@ public class BidActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getExtras().getString("username");
-        advertId = intent.getExtras().getInt("advertId");
+        advertId = intent.getExtras().getLong("advertId");
         token = intent.getExtras().getString("token");
 
         amountText = findViewById(R.id.bidAmountText);

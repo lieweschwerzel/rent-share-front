@@ -41,7 +41,7 @@ public interface JsonPlaceHolderApi {
     Call<List<Bid>> getBidsByUsername(@Path("username") String username);
 
     @GET("bid/search/advertId/{advertId}")
-    Call<List<Bid>> getBidsByAdvertId(@Path("advertId") int advertId, @Header("Authorization") String authToken);
+    Call<List<Bid>> getBidsByAdvertId(@Path("advertId") Long advertId, @Header("Authorization") String authToken);
 
 //    @GET("delete/{id}")
 //    Call<List<User>> search(@Path("name") String search);
