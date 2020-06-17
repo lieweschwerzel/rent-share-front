@@ -8,7 +8,7 @@ public class Bid {
 
     private String username;
 
-    private Long advertId;
+    private long advertId;
 
     private double amount;
 
@@ -16,7 +16,7 @@ public class Bid {
 
     public Bid() { }
 
-    public Bid(String username, Long advertId, double amount, String createdOn) {
+    public Bid(String username, long advertId, double amount, String createdOn) {
         this.username = username;
         this.advertId = advertId;
         this.amount = amount;
@@ -39,11 +39,11 @@ public class Bid {
         this.username = username;
     }
 
-    public Long getAdvertId() {
+    public long getAdvertId() {
         return advertId;
     }
 
-    public void setAdvertId(Long advertId) {
+    public void setAdvertId(long advertId) {
         this.advertId = advertId;
     }
 

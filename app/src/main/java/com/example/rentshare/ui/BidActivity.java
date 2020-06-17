@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentshare.R;
@@ -24,23 +25,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BidActivity extends AppCompatActivity {
 
     String username;
-    Long advertId;
-    String token;
+    static int advertId;
+    static String token;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     Retrofit retrofit;
     private EditText amountText;
     private double amount;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid);
+        textView = findViewById(R.id.textViewBid);
 
         String URL = getString(R.string.server);
 
         Intent intent = getIntent();
         username = intent.getExtras().getString("username");
-        advertId = intent.getExtras().getLong("advertId");
+        advertId = intent.getExtras().getInt("advertId");
         token = intent.getExtras().getString("token");
 
         amountText = findViewById(R.id.bidAmountText);
@@ -56,13 +59,13 @@ public class BidActivity extends AppCompatActivity {
     }
 
     private void getBids() {
-        Call<List<Bid>> call = jsonPlaceHolderApi.getBidsByAdvertId(advertId);
+        Call<List<Bid>> call = jsonPlaceHolderApi.getBidsByAdvertId(advertId, "Bearer " +token);
 
         call.enqueue(new Callback<List<Bid>>() {
             @Override
             public void onResponse(Call<List<Bid>> call, retrofit2.Response<List<Bid>> response) {
                 if (!response.isSuccessful()) {
-//                    textViewResult.setText("code: " + response.code());
+                    textView.setText("code: " + response.code());
                     return;
                 }
                 List<Bid> bids = response.body();
@@ -73,7 +76,7 @@ public class BidActivity extends AppCompatActivity {
                         content += "Username: " + bid.getUsername() + "\n";
                         content += "Amount: " + bid.getAmount() + "\n";
                         content += "Date: " + bid.getCreatedOn() + "\n\n";
-//                    textViewResult.append(content);
+                        textView.append(content);
                     }
                 }
             }

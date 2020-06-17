@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Advert {
 
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private long price;
@@ -16,7 +16,7 @@ public class Advert {
     private String createdOn;
     private int duration;
 
-    public Advert(String title, String description, long price, String imageUrl, String createdOn,   String advertOwner) {
+    public Advert(String title, String description, long price, String imageUrl, String createdOn, String advertOwner) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -57,11 +57,11 @@ public class Advert {
         this.advertOwner = advertOwner;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

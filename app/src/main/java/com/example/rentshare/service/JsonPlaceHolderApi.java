@@ -40,8 +40,8 @@ public interface JsonPlaceHolderApi {
     @GET("bid/search/{username}")
     Call<List<Bid>> getBidsByUsername(@Path("username") String username);
 
-    @GET("bid/search/{advertId}")
-    Call<List<Bid>> getBidsByAdvertId(@Path("advertId") Long advertId);
+    @GET("bid/search/advertId/{advertId}")
+    Call<List<Bid>> getBidsByAdvertId(@Path("advertId") int advertId, @Header("Authorization") String authToken);
 
 //    @GET("delete/{id}")
 //    Call<List<User>> search(@Path("name") String search);

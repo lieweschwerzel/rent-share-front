@@ -26,7 +26,7 @@ import org.joda.time.Seconds;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static String userName;
-    private static Long advertId;
+    private Long advertId;
     private static String token;
     private static String advertName;
     private static String adOwner;
