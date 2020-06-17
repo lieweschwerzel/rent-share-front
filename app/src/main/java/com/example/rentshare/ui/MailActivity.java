@@ -1,9 +1,11 @@
 package com.example.rentshare.ui;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentshare.R;
@@ -20,11 +22,28 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailActivity extends AppCompatActivity {
+    static String clientName;
+    static String adOwner;
+    static String token;
+    static String adName;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail);
+
+        textView= findViewById(R.id.textViewMailReservation);
+
+        Intent intent = getIntent();
+        clientName = intent.getExtras().getString("username");
+        token = intent.getExtras().getString("token");
+        adOwner = intent.getExtras().getString("adowner");
+        adName = intent.getExtras().getString("advertname");
+
+        textView.setText("\n\nDank voor uw reservering van: "+adName+ ".\n\nWe hebben u een email gestuurd met de gegevens van de verhuurder: \n"+adOwner+"\n");
+
+        Toast.makeText(this, clientName+" en "+adOwner, Toast.LENGTH_SHORT).show();
 
         new MailTask(this.getApplication()).execute();
 
@@ -48,7 +67,7 @@ public class MailActivity extends AppCompatActivity {
             final String password = new String(passwordBytes);
 
             // Ontvanger(s). Bij meerdere ontvangers de adressen scheiden met komma, in dezelfde string.
-            final String recipients = "";
+            final String recipients = clientName+","+adOwner;
 
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -72,8 +91,8 @@ public class MailActivity extends AppCompatActivity {
                         Message.RecipientType.TO,
                         InternetAddress.parse(recipients)
                 );
-                message.setSubject("Test mail");
-                message.setText("Test mail");
+                message.setSubject("Bevestiging van uw reservering: "+ adName );
+                message.setText("Hoi, \n\nDit is een bevestiging van een reservering van "+adName+". \nU kunt contact opnemen met de verhuurder op "+adOwner+".");
 
                 Transport.send(message);
 
