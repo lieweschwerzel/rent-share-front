@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.MailActivity">
 
+    <TextView
+        android:id="@+id/textViewMailReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="222dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="2dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonMailToMain"
+        android:layout_width="88dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="116dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickOkButton"
+        android:text="@android:string/ok"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMailReservation" />
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,11 @@ import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+    private static String userName;
+    private static Long advertId;
+    private static String token;
+    private static String advertName;
+    private static String adOwner;
     LocalDateTime now;
     LocalDateTime expirationDate;
     private TextView timerText, adOwnerTextView;
@@ -39,14 +44,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private TextView title, description, price;
     private ImageView image;
-    private String username;
-    private Long advertId;
-    private String token;
+    Button okBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advert_details_layout);
+        okBtn = findViewById(R.id.buttonMailToMain);
 
         timerText = findViewById(R.id.timerTextDetails);
         adOwnerTextView = findViewById(R.id.adOwnerDetailsview);
@@ -56,13 +60,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         image = findViewById(R.id.imageDetail);
 
         Intent intent = getIntent();
-        String newTitle = intent.getExtras().getString("title");
+        advertName = intent.getExtras().getString("title");
         String newDescription = intent.getExtras().getString("description");
-        String adOwner = intent.getExtras().getString("adowner");
+        adOwner = intent.getExtras().getString("adowner");
         latitude = intent.getExtras().getDouble("latitude");
         longitude = intent.getExtras().getDouble("longitude");
         Long newPrice = intent.getExtras().getLong("price");
-        username = intent.getExtras().getString("username");
+        userName = intent.getExtras().getString("username");
         advertId = intent.getExtras().getLong("advertId");
         token = intent.getExtras().getString("token");
         Glide.with(getApplicationContext()).load(intent.getExtras().getString("imageUrl")).into(image);
@@ -70,10 +74,10 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
 //        LocalDateTime createdOn = LocalDateTime.parse("2020-06-17T03:05:05.409");
 
-        title.setText(newTitle);
+        title.setText(advertName);
         description.setText(newDescription);
         price.setText("€" + newPrice + " per dag");
-        adOwnerTextView.setText("Verhuurd door: "+adOwner);
+        adOwnerTextView.setText("Verhuurd door: " + adOwner);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -109,7 +113,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             }.start();
         }
 
+
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -122,15 +128,16 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     public void directReservation(View view) {
-//        Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
+        Intent intent = new Intent(DetailsActivity.this, MailActivity.class);
         Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
-//        intent.putExtra("username", userName);
-//        intent.putExtra("token", token);
-        finish();
+        intent.putExtra("username", userName);
+        intent.putExtra("adowner", adOwner);
+        intent.putExtra("advertname", advertName);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 
     private void refreshTimer() {
-
         long hoursLeft = millisecondsLeft / 3600000;
         long minutesLeft = millisecondsLeft / 60000 - (hoursLeft * 60);
         long secondsLeft = millisecondsLeft / 1000 - ((minutesLeft * 60) + (hoursLeft * 3600));
@@ -150,17 +157,15 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         } else timeLeft.append(secondsLeft);
 
         timeLeft.append(" resterend");
-
         timerText.setText(timeLeft);
-
     }
 
     public void toBids(View view) {
 
         Intent intent = new Intent(DetailsActivity.this, BidActivity.class);
-           intent.putExtra("username", username);
-           intent.putExtra("token", token);
-           intent.putExtra("advertId", advertId);
-           startActivity(intent);
+        intent.putExtra("username", userName);
+        intent.putExtra("token", token);
+        intent.putExtra("advertId", advertId);
+        startActivity(intent);
     }
 }
