@@ -149,8 +149,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchAdverts() {
+        if (searchText.getText().toString().isEmpty()){
+            getAdverts();
+//        getUserId();
+
+            RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.advertRecycler);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        }
         String searchTitle = searchText.getText().toString();
-        Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle);
+        Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle, "Bearer "+ token);
 
         call.enqueue(new Callback<List<Advert>>() {
             @Override
@@ -164,15 +172,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-//                textViewResult.setText("");
                 List<Advert> adverts = response.body();
-
                 AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token);
                 mRecyclerView.setAdapter(mAdapter);
 
-                if (adverts.isEmpty()) {
-//                    textViewResult.setText("Niets gevonden op " + searchTitle);
-                }
 
                 for (Advert advert : adverts) {
                     String content = "";
