@@ -26,6 +26,7 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="116dp"
         android:background="@color/colorPrimary"
+        android:onClick="onClickOkButton"
         android:text="@android:string/ok"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,14 @@ public class MailActivity extends AppCompatActivity {
         new MailTask(this.getApplication()).execute();
 
         Toast.makeText(this, "Mail gestuurd", Toast.LENGTH_LONG).show();
+    }
+
+
+    public void onClickOkButton(View view){
+        Intent intent = new Intent(MailActivity.this, MainActivity.class);
+        intent.putExtra("username", clientName);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 
     private static class MailTask extends AsyncTask<Void, Void, Void> {
