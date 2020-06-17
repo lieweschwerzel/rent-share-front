@@ -48,6 +48,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
         viewHolder.description.setText(advert.getDescription());
         viewHolder.price.setText(advert.getPrice() + "€");
 //        viewHolder.image.setImageResource(R.drawable.bezem);
+        System.out.println(advert.getImageUrl());
         Glide.with(context).load(advert.getImageUrl()).into(viewHolder.image);
     }
 

@@ -21,6 +21,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,9 @@ import android.widget.Toast;
 
 import com.example.rentshare.R;
 import com.example.rentshare.model.Advert;
+import com.example.rentshare.model.ServerResponse;
+import com.example.rentshare.service.ApiConfig;
+import com.example.rentshare.service.AppConfig;
 import com.example.rentshare.service.JsonPlaceHolderApi;
 
 import com.bumptech.glide.Glide;
@@ -43,6 +47,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,17 +57,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddActivity extends AppCompatActivity {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
+    static String imageFileName = "";
+    private String currentPhotoPath = null;
+    private static String token = null;
+    private static String userName = null;
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private Button saveButton, cameraButton;
     private EditText editTitle, editDescription, editprice;
     private TextView userNameText;
     private ImageView imageView;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_TAKE_PHOTO = 1;
-    private String currentPhotoPath = null;
-    private static String token = null;
-    private static String userName = null;
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     LocationManager locationManager;
     LocationListener locationListener;
     Double latitude;
@@ -110,10 +118,11 @@ public class AddActivity extends AppCompatActivity {
             long price = Long.parseLong((editprice.getText().toString()));
             String createdOn = LocalDateTime.now().toString();
             String advertOwner = userName;
+            String imageUrl = "https://rentshare.000webhostapp.com/uploads/" + imageFileName;
             System.out.println(createdOn);
 
 
-            Advert advert = new Advert(title, description, price, currentPhotoPath, createdOn, advertOwner, latitude, longitude);
+            Advert advert = new Advert(title, description, price, imageUrl, createdOn, advertOwner, latitude, longitude);
 
             Call<Void> call = jsonPlaceHolderApi.createAdvert(advert, "Bearer " + token);
             call.enqueue(new Callback<Void>() {
@@ -124,6 +133,7 @@ public class AddActivity extends AppCompatActivity {
                         Toast.makeText(AddActivity.this, "error code: " + response.code(), Toast.LENGTH_LONG).show();
                         return;
                     }
+
                     Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddActivity.this, MainActivity.class);
                     intent.putExtra("token", token);
@@ -137,7 +147,7 @@ public class AddActivity extends AppCompatActivity {
                 }
             });
         }
-        }
+    }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -149,7 +159,6 @@ public class AddActivity extends AppCompatActivity {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
-                System.out.println("liewe " + ex.getMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -167,14 +176,14 @@ public class AddActivity extends AppCompatActivity {
                                     Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             Glide.with(this).load(currentPhotoPath).into(imageView);
+            uploadFile();
         }
     }
-
 
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -184,8 +193,43 @@ public class AddActivity extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
-        System.out.println(currentPhotoPath.toString());
+        imageFileName = image.getName();
         return image;
+    }
+
+    private void uploadFile() {
+        // Map is used to multipart the file using okhttp3.RequestBody
+        File file = new File(currentPhotoPath);
+
+        // Parsing any Media type file
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
+        Call<ServerResponse> call = getResponse.uploadFile(fileToUpload, filename);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                ServerResponse serverResponse = response.body();
+                if (serverResponse != null) {
+                    if (serverResponse.getSuccess()) {
+//                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    assert serverResponse != null;
+                    Log.v("Response", serverResponse.toString());
+                }
+//                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void onClickGps(View view) {
