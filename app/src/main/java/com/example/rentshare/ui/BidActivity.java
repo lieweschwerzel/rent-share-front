@@ -38,7 +38,7 @@ public class BidActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid);
         textView = findViewById(R.id.textViewBid);
-
+        getSupportActionBar().setTitle("Doe een bod");
         String URL = getString(R.string.server);
 
         Intent intent = getIntent();
@@ -71,7 +71,9 @@ public class BidActivity extends AppCompatActivity {
                 List<Bid> bids = response.body();
 
                 if (bids != null && !bids.isEmpty()) {
+                    textView.setText("");
                     for (Bid bid : bids) {
+
                         String content = "";
                         content += "Username: " + bid.getUsername() + "\n";
                         content += "Amount: " + bid.getAmount() + "\n";
@@ -116,6 +118,7 @@ public class BidActivity extends AppCompatActivity {
                 }
                 Toast.makeText(BidActivity.this, "Je bod van " + "€" + amount + " is geplaatst", Toast.LENGTH_LONG).show();
                 amountText.setText("");
+                getBids();
             }
 
             @Override

@@ -6,39 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".ui.BidActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="371dp"
+        android:layout_height="410dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bidAmountText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewBid"
+                android:layout_width="221dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <EditText
         android:id="@+id/bidAmountText"
         android:layout_width="129dp"
         android:layout_height="43dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Voer bedrag in"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        tools:layout_editor_absoluteX="32dp" />
 
     <Button
         android:id="@+id/bidBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:onClick="onClickSaveBid"
         android:text="Bieden"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/bidAmountText"
-        app:layout_constraintStart_toEndOf="@+id/bidAmountText"
-        app:layout_constraintTop_toTopOf="@+id/bidAmountText" />
-
-    <TextView
-        android:id="@+id/textViewBid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bidAmountText" />
 
 </android.support.constraint.ConstraintLayout>

@@ -51,7 +51,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advert_details_layout);
         okBtn = findViewById(R.id.buttonMailToMain);
-
+        getSupportActionBar().setTitle("Advertentie details");
         timerText = findViewById(R.id.timerTextDetails);
         adOwnerTextView = findViewById(R.id.adOwnerDetailsview);
         title = findViewById(R.id.titleDetailview);
