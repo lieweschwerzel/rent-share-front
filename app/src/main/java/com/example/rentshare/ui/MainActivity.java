@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         }
         String searchTitle = searchText.getText().toString();
-        Call<List<Advert>> call = jsonPlaceHolderApi.search(searchTitle, "Bearer "+ token);
+		
+        Call<List<Advert>> call = jsonPlaceHolderApi.searchAdvert(searchTitle, "Bearer "+ token);
 
         call.enqueue(new Callback<List<Advert>>() {
             @Override
@@ -173,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 List<Advert> adverts = response.body();
-                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token);
+
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token, userName);
+
                 mRecyclerView.setAdapter(mAdapter);
 
 
@@ -204,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 List<Advert> adverts = response.body();
-                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token);
+                AdvertAdapter mAdapter = new AdvertAdapter(getApplicationContext(), adverts, token, userName);
                 mRecyclerView.setAdapter(mAdapter);
 
                 for (Advert advert : adverts) {

@@ -24,6 +24,7 @@ import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+
     LocalDateTime now;
     LocalDateTime expirationDate;
     private TextView timerText, adOwnerTextView;
@@ -38,7 +39,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private TextView title, description, price;
     private ImageView image;
-    private String userName;
+    private String username;
+    private Long advertId;
     private String token;
 
     @Override
@@ -60,6 +62,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         latitude = intent.getExtras().getDouble("latitude");
         longitude = intent.getExtras().getDouble("longitude");
         Long newPrice = intent.getExtras().getLong("price");
+        username = intent.getExtras().getString("username");
+        advertId = intent.getExtras().getLong("advertId");
+        token = intent.getExtras().getString("token");
         Glide.with(getApplicationContext()).load(intent.getExtras().getString("imageUrl")).into(image);
         createdOn = LocalDateTime.parse(intent.getExtras().getString("createdOn"));
 
@@ -148,5 +153,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         timerText.setText(timeLeft);
 
+    }
+
+    public void toBids(View view) {
+
+        Intent intent = new Intent(DetailsActivity.this, BidActivity.class);
+           intent.putExtra("username", username);
+           intent.putExtra("token", token);
+           intent.putExtra("advertId", advertId);
+           startActivity(intent);
     }
 }

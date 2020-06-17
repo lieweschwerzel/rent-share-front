@@ -21,12 +21,14 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
         private List<Advert> mAdverts;
         private Context context;
         private String token;
+        private String username;
 
 
-    public AdvertAdapter(Context context, List<Advert> mAdverts, String token) {
+    public AdvertAdapter(Context context, List<Advert> mAdverts, String token, String username) {
             this.context = context;
             this.mAdverts = mAdverts;
             this.token = token;
+            this.username = username;
         }
 
         @NonNull
@@ -85,6 +87,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                         Advert onClickedAdvert = mAdverts.get(position);
                         Intent intent = new Intent(context, DetailsActivity.class);
                         intent.putExtra("title", onClickedAdvert.getTitle());
+                        intent.putExtra("advertId", onClickedAdvert.getId());
                         intent.putExtra("description", onClickedAdvert.getDescription());
                         intent.putExtra("price", onClickedAdvert.getPrice());
                         intent.putExtra("imageUrl", onClickedAdvert.getImageUrl());
@@ -93,6 +96,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertView
                         intent.putExtra("latitude", onClickedAdvert.getLatitude());
                         intent.putExtra("longitude", onClickedAdvert.getLongitude());
                         intent.putExtra("token", token);
+                        intent.putExtra("username", username);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }
