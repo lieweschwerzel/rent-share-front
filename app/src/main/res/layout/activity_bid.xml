@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.BidActivity">
 
+    <EditText
+        android:id="@+id/bidAmountText"
+        android:layout_width="129dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Voer bedrag in"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bidBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickSaveBid"
+        android:text="Bieden"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/bidAmountText"
+        app:layout_constraintStart_toEndOf="@+id/bidAmountText"
+        app:layout_constraintTop_toTopOf="@+id/bidAmountText" />
+
 </android.support.constraint.ConstraintLayout>

@@ -1,18 +1,26 @@
 package com.example.rentshare.model;
 
+import java.time.LocalDateTime;
+
 public class Bid {
 
     private Long id;
 
-    private String fk_username;
+    private String username;
 
-    private Long fk_advertId;
+    private Long advertId;
+
+    private double amount;
+
+    private String createdOn;
 
     public Bid() { }
 
-    public Bid(String fk_username, Long fk_advertId) {
-        this.fk_username = fk_username;
-        this.fk_advertId = fk_advertId;
+    public Bid(String username, Long advertId, double amount, String createdOn) {
+        this.username = username;
+        this.advertId = advertId;
+        this.amount = amount;
+        this.createdOn = createdOn;
     }
 
     public Long getId() {
@@ -23,19 +31,35 @@ public class Bid {
         this.id = id;
     }
 
-    public String getFk_username() {
-        return fk_username;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFk_username(String fk_username) {
-        this.fk_username = fk_username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Long getFk_advertId() {
-        return fk_advertId;
+    public Long getAdvertId() {
+        return advertId;
     }
 
-    public void setFk_advertId(Long fk_advertId) {
-        this.fk_advertId = fk_advertId;
+    public void setAdvertId(Long advertId) {
+        this.advertId = advertId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
     }
 }

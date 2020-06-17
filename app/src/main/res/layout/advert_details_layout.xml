@@ -60,14 +60,13 @@
 
     <Button
         android:id="@+id/reservationBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="directReservation"
         android:text="Reserveer Direct"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toStartOf="@+id/bidBtn"
+        app:layout_constraintEnd_toStartOf="@+id/toBidBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
 
@@ -120,16 +119,16 @@
         tools:context="com.example.rentshare.ui.MapsActivity" />
 
     <Button
-        android:id="@+id/bidBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:id="@+id/toBidBtn"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimary"
         android:onClick="toBids"
         android:text="Bieden"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/reservationBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reservationBtn"
-        app:layout_constraintTop_toTopOf="@+id/reservationBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
 </android.support.constraint.ConstraintLayout>
 </ScrollView>
