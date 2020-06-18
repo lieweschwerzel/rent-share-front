@@ -27,6 +27,7 @@ public class BidActivity extends AppCompatActivity {
     String username;
     static Long advertId;
     static String token;
+    static double highestBid = 0;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     Retrofit retrofit;
     private EditText amountText;
@@ -45,6 +46,7 @@ public class BidActivity extends AppCompatActivity {
         username = intent.getExtras().getString("username");
         advertId = intent.getExtras().getLong("advertId");
         token = intent.getExtras().getString("token");
+        System.out.println("token:  " + token);
 
         amountText = findViewById(R.id.bidAmountText);
 
@@ -59,7 +61,7 @@ public class BidActivity extends AppCompatActivity {
     }
 
     private void getBids() {
-        Call<List<Bid>> call = jsonPlaceHolderApi.getBidsByAdvertId(advertId, "Bearer " +token);
+        Call<List<Bid>> call = jsonPlaceHolderApi.getBidsByAdvertId(advertId, "Bearer " + token);
 
         call.enqueue(new Callback<List<Bid>>() {
             @Override
@@ -68,21 +70,23 @@ public class BidActivity extends AppCompatActivity {
                     textView.setText("code: " + response.code());
                     return;
                 }
-                List<Bid> bids = response.body();
 
+                List<Bid> bids = response.body();
                 if (bids != null && !bids.isEmpty()) {
                     textView.setText("");
                     for (Bid bid : bids) {
-
+                        if (highestBid <= bid.getAmount()) {
+                            highestBid = bid.getAmount();
+//                            System.out.println("bid  " +highestBid);
+                        }
                         String content = "";
-                        content += "Username: " + bid.getUsername() + "\n";
-                        content += "Amount: " + bid.getAmount() + "\n";
-                        content += "Date: " + bid.getCreatedOn() + "\n\n";
+                        content += "Gebruiker: " + bid.getUsername() + "\n";
+                        content += "Bod: " + bid.getAmount() +"€"+ "\n\n";
+//                        content += "Date: " + bid.getCreatedOn() + "\n\n";
                         textView.append(content);
                     }
                 }
             }
-
             /**
              * Invoked when a network exception occurred talking to the server or when an unexpected
              * exception occurred creating the request or processing the response.
@@ -104,6 +108,10 @@ public class BidActivity extends AppCompatActivity {
             amount = Double.parseDouble((amountText.getText().toString()));
         } else {
             Toast.makeText(this, "Voer een bedrag in", Toast.LENGTH_SHORT).show();
+        }
+        if (Double.parseDouble((amountText.getText().toString())) <= highestBid) {
+            Toast.makeText(this, "Voer een bedrag hoger dan hoogste bod in", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Bid bid = new Bid(username, advertId, amount, LocalDateTime.now().toString());

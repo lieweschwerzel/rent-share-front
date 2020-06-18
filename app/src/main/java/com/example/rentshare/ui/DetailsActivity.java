@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rentshare.R;
+import com.example.rentshare.model.Bid;
+import com.example.rentshare.service.JsonPlaceHolderApi;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,9 +26,16 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static String userName;
-    private Long advertId;
+    static Long advertId;
     private static String token;
     private static String advertName;
     private static String adOwner;
@@ -41,23 +50,29 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private static LocalDateTime createdOn = null;
     double latitude;
     double longitude;
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
+    Retrofit retrofit;
 
-    private TextView title, description, price;
+    private TextView title, description, price, highestBidTextView;
     private ImageView image;
     Button okBtn;
+    private static double highestBid = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advert_details_layout);
+        String URL = getString(R.string.server);
+
         okBtn = findViewById(R.id.buttonMailToMain);
         getSupportActionBar().setTitle("Advertentie details");
         timerText = findViewById(R.id.timerTextDetails);
         adOwnerTextView = findViewById(R.id.adOwnerDetailsview);
         title = findViewById(R.id.titleDetailview);
         description = findViewById(R.id.descriptionDetail);
-        price = findViewById(R.id.priceDetail);
+        price = findViewById(R.id.priceDetailView);
         image = findViewById(R.id.imageDetail);
+        highestBidTextView = findViewById(R.id.hoogsteBodDetailView2);
 
         Intent intent = getIntent();
         advertName = intent.getExtras().getString("title");
@@ -71,7 +86,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         token = intent.getExtras().getString("token");
         Glide.with(getApplicationContext()).load(intent.getExtras().getString("imageUrl")).into(image);
         createdOn = LocalDateTime.parse(intent.getExtras().getString("createdOn"));
-
+        Toast.makeText(this, advertId.toString(), Toast.LENGTH_SHORT).show();
 //        LocalDateTime createdOn = LocalDateTime.parse("2020-06-17T03:05:05.409");
 
         title.setText(advertName);
@@ -82,7 +97,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         now = LocalDateTime.now();
         int duration = 24;
@@ -112,6 +126,18 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             }.start();
         }
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+//        getBids();
+        getHighestBid();
+
+
 
 
     }
@@ -167,5 +193,40 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         intent.putExtra("token", token);
         intent.putExtra("advertId", advertId);
         startActivity(intent);
+    }
+
+    private void getHighestBid() {
+        Call<List<Bid>> call = jsonPlaceHolderApi.getBidsByAdvertId(advertId, "Bearer " + token);
+
+        call.enqueue(new Callback<List<Bid>>() {
+            @Override
+            public void onResponse(Call<List<Bid>> call, retrofit2.Response<List<Bid>> response) {
+                if (!response.isSuccessful()) {
+//                    textView.setText("code: " + response.code());
+                    return;
+                }
+
+                List<Bid> bids = response.body();
+                if (bids != null && !bids.isEmpty()) {
+                    highestBid = response.body().get(0).getAmount();
+                    if (highestBid == 0){
+                        highestBidTextView.setText("geen biedingen");
+                    } else
+                        highestBidTextView.setText(String.valueOf(highestBid));
+                }
+            }
+
+            /**
+             * Invoked when a network exception occurred talking to the server or when an unexpected
+             * exception occurred creating the request or processing the response.
+             *
+             * @param call
+             * @param t
+             */
+            @Override
+            public void onFailure(Call<List<Bid>> call, Throwable t) {
+//                textViewResult.setText(t.getMessage());
+            }
+        });
     }
 }

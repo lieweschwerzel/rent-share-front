@@ -4,131 +4,164 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
 
-    <ImageView
-        android:id="@+id/imageDetail"
-        android:layout_width="165dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/adOwnerDetailsview"
-        app:layout_constraintTop_toBottomOf="@+id/adOwnerDetailsview"
-        app:srcCompat="@drawable/bezem" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/adOwnerDetailsview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="owner"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/titleDetailview"
-        app:layout_constraintTop_toBottomOf="@+id/titleDetailview" />
+        <TextView
+            android:id="@+id/hoogsteBodDetailView2"
+            android:layout_width="176dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="52dp"
+            android:text="nog geen bod gedaan"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/hoogsteBodDetailsTextView"
+            app:layout_constraintTop_toBottomOf="@+id/hoogsteBodDetailsTextView" />
 
-    <TextView
-        android:id="@+id/titleDetailview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="AdvertTitle"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/hoogsteBodDetailsTextView"
+            android:layout_width="139dp"
+            android:layout_height="22dp"
+            android:text="Hoogste bod"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/priceDetailView"
+            app:layout_constraintTop_toBottomOf="@+id/priceDetailView" />
 
-    <TextView
-        android:id="@+id/descriptionDetail"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/OmschrijvingTextView"
-        app:layout_constraintTop_toBottomOf="@+id/OmschrijvingTextView" />
+        <ImageView
+            android:id="@+id/imageDetail"
+            android:layout_width="165dp"
+            android:layout_height="174dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/adOwnerDetailsview"
+            app:layout_constraintTop_toBottomOf="@+id/adOwnerDetailsview"
+            app:srcCompat="@drawable/bezem" />
 
-    <TextView
-        android:id="@+id/priceDetail"
-        android:layout_width="168dp"
-        android:layout_height="59dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/prijsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/prijsTextView" />
+        <TextView
+            android:id="@+id/adOwnerDetailsview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="owner"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/titleDetailview"
+            app:layout_constraintTop_toBottomOf="@+id/titleDetailview" />
 
-    <Button
-        android:id="@+id/reservationBtn"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="directReservation"
-        android:text="Reserveer Direct"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toStartOf="@+id/toBidBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
+        <TextView
+            android:id="@+id/titleDetailview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="AdvertTitle"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/prijsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Prijs:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/descriptionDetail"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionDetail" />
+        <TextView
+            android:id="@+id/descriptionDetail"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/OmschrijvingTextView"
+            app:layout_constraintTop_toBottomOf="@+id/OmschrijvingTextView" />
 
-    <TextView
-        android:id="@+id/OmschrijvingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Omschrijving: "
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
+        <Button
+            android:id="@+id/reservationBtn"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="directReservation"
+            android:text="Reserveer Direct"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintStart_toStartOf="@+id/descriptionDetail"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionDetail" />
 
-    <TextView
-        android:id="@+id/timerTextDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageDetail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageDetail" />
+        <Button
+            android:id="@+id/toBitBtn"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="toBids"
+            android:text="BIEDEN"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/reservationBtn"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionDetail" />
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationBtn"
-        tools:context="com.example.rentshare.ui.MapsActivity" />
+        <TextView
+            android:id="@+id/prijsTextView"
+            android:layout_width="40dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="44dp"
+            android:text="Prijs:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.143"
+            app:layout_constraintStart_toEndOf="@+id/imageDetail"
+            app:layout_constraintTop_toBottomOf="@+id/titleDetailview" />
 
-    <Button
-        android:id="@+id/toBidBtn"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:background="@color/colorPrimary"
-        android:onClick="toBids"
-        android:text="Bieden"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="@+id/reservationBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reservationBtn"
-        app:layout_constraintTop_toBottomOf="@+id/priceDetail" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/priceDetailView"
+            android:layout_width="170dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/prijsTextView"
+            app:layout_constraintTop_toBottomOf="@+id/prijsTextView" />
+
+        <TextView
+            android:id="@+id/OmschrijvingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Omschrijving: "
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
+
+        <TextView
+            android:id="@+id/timerTextDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/imageDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toEndOf="@+id/imageDetail"
+            app:layout_constraintTop_toBottomOf="@+id/hoogsteBodDetailView2" />
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationBtn"
+            tools:context="com.example.rentshare.ui.MapsActivity" />
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
