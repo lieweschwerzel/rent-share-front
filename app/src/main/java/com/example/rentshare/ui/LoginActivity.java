@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Retrofit.Builder builder;
     Retrofit retrofit;
     UserClient userClient;
+    private String userName;
 
 
     @Override
@@ -44,19 +45,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-        String userName = usernameText.getText().toString();
+        userName = usernameText.getText().toString();
         String password = passwordText.getText().toString();
+        System.out.println("test1: "+ userName);
         Login login = new Login(userName, password);
+
+        if (!userName.equals("a")){
+            System.out.println("test234234");
+
+        }
         Call<User> call = userClient.login(login);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    token = response.body().getToken();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("username", userName);
-                    intent.putExtra("token", token);
-                    startActivity(intent);
+                    if (userName.equals("admin")){
+                        System.out.println("test "+userName);
+                        token = response.body().getToken();
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        intent.putExtra("username", userName);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
+                    }else{
+                        token = response.body().getToken();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("username", userName);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
+                    }
+
                 } else {
                     Toast.makeText(LoginActivity.this, "error!!", Toast.LENGTH_SHORT).show();
 

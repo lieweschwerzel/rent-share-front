@@ -108,11 +108,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             hoursLeft = Hours.hoursBetween(now, expirationDate).getHours();
             minutesLeft = Minutes.minutesBetween(now, expirationDate).getMinutes() - (hoursLeft * 60);
             secondsLeft = Seconds.secondsBetween(now, expirationDate).getSeconds() - ((minutesLeft * 60) + (hoursLeft * 3600));
-
             millisecondsLeft = Seconds.secondsBetween(now, expirationDate).getSeconds() * 1000;
-
             timerText.setVisibility(View.VISIBLE);
-
             countDownTimer = new CountDownTimer(millisecondsLeft, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -134,12 +131,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-//        getBids();
         getHighestBid();
-
-
-
-
     }
 
 
@@ -212,7 +204,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                     if (highestBid == 0){
                         highestBidTextView.setText("geen biedingen");
                     } else
-                        highestBidTextView.setText(String.valueOf(highestBid));
+                        highestBidTextView.setText(String.valueOf(highestBid)+"€");
                 }
             }
 

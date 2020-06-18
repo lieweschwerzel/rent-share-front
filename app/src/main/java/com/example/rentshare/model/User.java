@@ -71,4 +71,17 @@ public class User {
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", token='" + token + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", createdOn='" + createdOn + '\'' +
+                '}';
+    }
 }

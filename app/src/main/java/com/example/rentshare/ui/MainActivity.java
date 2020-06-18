@@ -245,6 +245,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.settingsmenu:
                 Intent intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("token", token);
+                intent.putExtra("username", userName);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 return true;
             case R.id.signoutmenu:

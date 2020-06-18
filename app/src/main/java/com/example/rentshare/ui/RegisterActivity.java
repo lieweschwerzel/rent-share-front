@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<User> call2, Response<User> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(RegisterActivity.this, "USER heeft token \n" + response.body().getToken(), Toast.LENGTH_SHORT).show();
                                 token = response.body().getToken();
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 intent.putExtra("username", userName);

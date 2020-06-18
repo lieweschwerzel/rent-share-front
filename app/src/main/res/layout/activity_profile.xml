@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/addressNumberProfileText"
+        android:id="@+id/addressNumberProfileEdit"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -26,7 +26,7 @@
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/addressStreetProfileText"
+        app:layout_constraintStart_toEndOf="@+id/addressStreetProfileEdit"
         app:layout_constraintTop_toBottomOf="@+id/profileLabel" />
 
     <TextView
@@ -36,21 +36,11 @@
         android:layout_marginTop="8dp"
         android:labelFor="@id/zipCodeRegisterText"
         android:text="Postcode"
-        app:layout_constraintStart_toStartOf="@+id/addressStreetProfileText"
-        app:layout_constraintTop_toBottomOf="@+id/addressStreetProfileText" />
-
-    <TextView
-        android:id="@+id/cityProfileLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:labelFor="@id/zipCodeRegisterText"
-        android:text="Stad"
-        app:layout_constraintStart_toStartOf="@+id/zipcodeProfileText"
-        app:layout_constraintTop_toBottomOf="@+id/zipcodeProfileText" />
+        app:layout_constraintStart_toStartOf="@+id/addressStreetProfileEdit"
+        app:layout_constraintTop_toBottomOf="@+id/addressStreetProfileEdit" />
 
     <EditText
-        android:id="@+id/addressStreetProfileText"
+        android:id="@+id/addressStreetProfileEdit"
         android:layout_width="237dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
@@ -67,13 +57,15 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
 
+        android:background="@color/colorAccent"
+        android:onClick="onClickSaveDetails"
         android:text="Opslaan"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityProfileText"
-        app:layout_constraintVertical_bias="0.217" />
+        app:layout_constraintTop_toBottomOf="@+id/zipcodeProfileEdit" />
 
     <TextView
         android:id="@+id/addressProfileLabel"
@@ -83,11 +75,11 @@
 
         android:labelFor="@id/addressStreetRegisterText"
         android:text="Straatnaam en huisnummer"
-        app:layout_constraintStart_toStartOf="@+id/userNameProfileLabel"
-        app:layout_constraintTop_toBottomOf="@+id/userNameProfileLabel" />
+        app:layout_constraintStart_toStartOf="@+id/userNameProfileText"
+        app:layout_constraintTop_toBottomOf="@+id/userNameProfileText" />
 
     <TextView
-        android:id="@+id/userNameProfileLabel"
+        android:id="@+id/userNameProfileText"
         android:layout_width="123dp"
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
@@ -97,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileLabel" />
 
     <EditText
-        android:id="@+id/zipcodeProfileText"
+        android:id="@+id/zipcodeProfileEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -106,14 +98,4 @@
         app:layout_constraintStart_toStartOf="@+id/zipCodeProfileLabel"
         app:layout_constraintTop_toBottomOf="@+id/zipCodeProfileLabel" />
 
-    <EditText
-        android:id="@+id/cityProfileText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Stad"
-        app:layout_constraintStart_toStartOf="@+id/cityProfileLabel"
-        app:layout_constraintTop_toBottomOf="@+id/cityProfileLabel" />
 </android.support.constraint.ConstraintLayout>

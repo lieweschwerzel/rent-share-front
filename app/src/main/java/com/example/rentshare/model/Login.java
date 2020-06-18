@@ -24,4 +24,12 @@ public class Login {
         this.houseNumber = houseNumber;
         this.createdOn = createdOn;
     }
+
+    public Login(String username, String zipcode, String streetName, int houseNumber) {
+        this.username = username;
+        this.zipcode = zipcode;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+
+    }
 }

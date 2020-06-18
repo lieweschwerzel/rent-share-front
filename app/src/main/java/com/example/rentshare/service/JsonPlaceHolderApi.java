@@ -2,6 +2,7 @@ package com.example.rentshare.service;
 
 import com.example.rentshare.model.Advert;
 import com.example.rentshare.model.Bid;
+import com.example.rentshare.model.User;
 
 import java.util.List;
 
@@ -42,6 +43,9 @@ public interface JsonPlaceHolderApi {
 
     @GET("bid/search/advertId/{advertId}")
     Call<List<Bid>> getBidsByAdvertId(@Path("advertId") Long advertId, @Header("Authorization") String authToken);
+
+    @GET("user/searchByUser/{userName}")
+    Call<User> getUserDetailsByUsername(@Path("userName") String userName, @Header("Authorization") String authToken);
 
 //    @GET("delete/{id}")
 //    Call<List<User>> search(@Path("name") String search);

@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UserClient {
@@ -21,6 +22,9 @@ public interface UserClient {
 
     @GET("searchByUser/{username}")
     Call<Void> getUserId(@Path("username") String userName);
+
+    @PUT("user/update/{username}")
+    Call<User> updateUser(@Body Login login);
 //                               @Header("Authorization") String authToken);
 
 }
