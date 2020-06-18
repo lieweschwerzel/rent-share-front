@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="onClickSearchButton"
-        android:text="search"
+        android:text="zoeken"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchText"
@@ -29,29 +29,16 @@
         android:onClick="onClickAddButton"
         android:text="add"
         android:textColor="@android:color/background_light"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="@+id/searchButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="84dp"
-        android:layout_height="46dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="onClickDeleteButton"
-        android:text="delete"
-        android:textColor="@android:color/background_light"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/addButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/addButton"
-        app:layout_constraintTop_toBottomOf="@+id/addButton"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        tools:visibility="invisible" />
 
     <EditText
         android:id="@+id/searchText"
-        android:layout_width="270dp"
-        android:layout_height="37dp"
+        android:layout_width="272dp"
+        android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:autofillHints="@android:string/search_go"
@@ -65,10 +52,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/advertRecycler"
-        android:layout_width="384dp"
-        android:layout_height="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+        app:layout_constraintTop_toBottomOf="@+id/addButton" />
 
 </android.support.constraint.ConstraintLayout>

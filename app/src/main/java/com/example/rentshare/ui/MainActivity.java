@@ -250,12 +250,22 @@ public class MainActivity extends AppCompatActivity {
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 return true;
+            case R.id.adMenu:
+                addAdvert();
+                return true;
             case R.id.signoutmenu:
                 signOut2();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void addAdvert() {
+        Intent intent = new Intent(MainActivity.this, AddActivity.class);
+        intent.putExtra("token", token);
+        intent.putExtra("username", userName);
+        startActivity(intent);
     }
 
     public void signOut2(){

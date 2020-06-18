@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Profiel"
+        android:text="Profiel Bekijken"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,11 +61,13 @@
         android:onClick="onClickSaveDetails"
         android:text="Opslaan"
         android:textColor="@android:color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zipcodeProfileEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/zipcodeProfileEdit"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/addressProfileLabel"
@@ -84,6 +86,7 @@
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
 
+        android:layout_marginTop="24dp"
         android:text="Username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileLabel" />

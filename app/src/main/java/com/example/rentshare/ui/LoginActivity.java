@@ -50,10 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("test1: "+ userName);
         Login login = new Login(userName, password);
 
-        if (!userName.equals("a")){
-            System.out.println("test234234");
 
-        }
         Call<User> call = userClient.login(login);
         call.enqueue(new Callback<User>() {
             @Override

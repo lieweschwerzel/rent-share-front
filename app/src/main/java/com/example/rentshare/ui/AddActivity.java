@@ -134,7 +134,7 @@ public class AddActivity extends AppCompatActivity {
                         return;
                     }
 
-                    Toast.makeText(AddActivity.this, "It worked" + response.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, "Advertentie toegevoegd", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddActivity.this, MainActivity.class);
                     intent.putExtra("token", token);
                     intent.putExtra("username", userName);

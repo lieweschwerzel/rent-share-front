@@ -47,6 +47,9 @@ public interface JsonPlaceHolderApi {
     @GET("user/searchByUser/{userName}")
     Call<User> getUserDetailsByUsername(@Path("userName") String userName, @Header("Authorization") String authToken);
 
+    @GET("user/admin/delete")
+    Call<ResponseBody> deleteAllUsers(@Header("Authorization") String authToken);
+
 //    @GET("delete/{id}")
 //    Call<List<User>> search(@Path("name") String search);
 

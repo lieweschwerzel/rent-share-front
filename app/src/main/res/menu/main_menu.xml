@@ -8,6 +8,9 @@
         android:title="Profiel"/>
 
     <item
+        android:id="@+id/adMenu"
+        android:title="Maak Advertentie" />
+    <item
         android:id="@+id/signoutmenu"
         android:title="Uitloggen"/>
 

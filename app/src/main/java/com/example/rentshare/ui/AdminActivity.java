@@ -46,8 +46,33 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-    public void onClickDeleteAll(View view) {
+    public void onClickDeleteAllAdverts(View view) {
         deleteAll();
+    }
+
+    public void onClickDeleteAllUsers(View view) {
+        deleteAllUsers();
+    }
+
+    private void deleteAllUsers() {
+        Call<ResponseBody> call = jsonPlaceHolderApi.deleteAllUsers("Bearer " + token);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(AdminActivity.this, "createPost Code: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(AdminActivity.this, "All USERS Deleted  " + response.toString(), Toast.LENGTH_SHORT).show();
+//                getAdverts();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(AdminActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG);
+            }
+        });
     }
 
     private void deleteAll() {
